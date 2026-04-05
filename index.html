@@ -3804,7 +3804,7 @@ function renderBattleHistory() {
     return;
   }
   const modeLabels = {translation:'Translation',definition:'Definition',context:'Context'};
-  const resultEmoji = {win:'\uD83C\uDFC6',loss:'\uD83D\uDCAA',draw:'\uD83E\uDD1D'};
+  const resultEmoji = {win:'&#127942;',loss:'&#128170;',draw:'&#129309;'};
   const resultColor = {win:'var(--correct)',loss:'var(--wrong)',draw:'var(--muted)'};
   list.innerHTML = state.battleHistory.map(b => {
     const d = new Date(b.date);
@@ -4688,7 +4688,7 @@ async function saveFlashcardProgress(word) {
   const slug = slugify(word.source);
   try {
     const docRef = studentsRef.doc(state.studentId).collection('progress').doc(slug);
-    const key = 'words.' + word.w.replace(/\./g, '\u00b7') + '.lastSeen';
+    const key = 'words.' + word.w.replace(/\./g, '·') + '.lastSeen';
     await docRef.set({ [key]: new Date().toISOString() }, { merge: true });
   } catch(e) { console.error('Flashcard progress save error:', e); }
 }
@@ -7473,14 +7473,14 @@ async function loadBattleHistory(filter) {
     });
 
     list.innerHTML = items.map(function(b) {
-      var icon = b.result === 'win' ? '\uD83C\uDFC6' : b.result === 'draw' ? '\uD83E\uDD1D' : '\uD83D\uDCAA';
+      var icon = b.result === 'win' ? '&#127942;' : b.result === 'draw' ? '&#129309;' : '&#128170;';
       var color = b.result === 'win' ? 'var(--correct)' : b.result === 'loss' ? 'var(--wrong)' : 'var(--muted)';
       var date = b.date ? new Date(b.date).toLocaleDateString('en-GB', {day:'numeric',month:'short'}) : '';
       var typeLabel = b.type === 'grammar-duel' ? 'Grammar Duel' : b.type === 'duel' ? 'Word Duel' : b.mode ? ({translation:'Translation',definition:'Definition',context:'Context'}[b.mode] || 'Battle') : 'Live Battle';
       return '<div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid var(--card-border);">' +
         '<div><div style="font-weight:600;">' + icon + ' vs ' + escapeHtml(b.opponent || 'Unknown') + '</div>' +
         '<div style="font-size:0.75rem;color:var(--muted);">' + typeLabel + ' \u00b7 ' + date + '</div></div>' +
-        '<div style="text-align:right;"><div style="font-weight:700;color:' + color + ';">' + (b.myScore || 0) + '\u2013' + (b.theirScore || 0) + '</div>' +
+        '<div style="text-align:right;"><div style="font-weight:700;color:' + color + ';">' + (b.myScore || 0) + '–' + (b.theirScore || 0) + '</div>' +
         '<div style="font-size:0.7rem;color:var(--muted);">+' + (b.xpEarned || 0) + ' XP</div></div></div>';
     }).join('');
   } catch (e) {
