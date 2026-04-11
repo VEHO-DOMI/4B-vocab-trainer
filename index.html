@@ -8006,6 +8006,9 @@ showHomeScreen = function() {
     if (olLabel) olLabel.textContent = totalXp.toLocaleString() + ' XP';
     var olFill = document.getElementById('overall-progress-fill');
     if (olFill) olFill.style.width = Math.round(ol.progress * 100) + '%';
+    loadClassLevel();
+    var wgc = document.getElementById('weekly-goal-card');
+    if (wgc) wgc.style.display = 'none';
     _origShowHomeScreen();
     addModeSwitchPill();
   }
@@ -8158,11 +8161,30 @@ function showGrammarHomeScreen() {
   if (olLabel) olLabel.textContent = totalXp.toLocaleString() + ' XP';
   var olFill = document.getElementById('overall-progress-fill');
   if (olFill) olFill.style.width = Math.round(ol.progress * 100) + '%';
+  loadClassLevel();
   addModeSwitchPill();
   showScreen('home-screen');
   if (typeof setupPresence === 'function') setupPresence();
   var battleBtn = document.getElementById('btn-battle');
   if (battleBtn) battleBtn.style.display = '';
+}
+
+async function loadClassLevel() {
+  var card = document.getElementById('class-level-card');
+  if (!card || !db || !CLASS_ID) return;
+  try {
+    var snap = await db.collection('classes').doc(CLASS_ID).collection('students').get();
+    var totalXp = 0;
+    snap.forEach(function(doc) { var d = doc.data(); totalXp += (d.xp || 0) + (d.grammarXp || 0); });
+    var cl = getClassLevel(totalXp);
+    var sectionLabel = SECTIONS.find(function(s) { return s.id === CLASS_ID; });
+    var label = sectionLabel ? sectionLabel.label : CLASS_ID;
+    document.getElementById('class-level-title').textContent = '🏫 Class ' + label;
+    document.getElementById('class-level-name').textContent = cl.name;
+    document.getElementById('class-level-text').textContent = totalXp.toLocaleString() + ' XP · Level ' + cl.level + (cl.next ? ' → ' + cl.next.name : '');
+    document.getElementById('class-level-fill').style.width = Math.round(cl.progress * 100) + '%';
+    card.style.display = '';
+  } catch(e) { card.style.display = 'none'; }
 }
 
 function addModeSwitchPill() {
