@@ -7901,8 +7901,79 @@ async function loadBattleHistory(filter) {
 
 function loadGrammarData() {
   if (grammarDataLoaded) return;
-  // Will be populated by the embedded data block at end of file
   grammarDataLoaded = true;
+  initGrammarLevelFilter();
+}
+
+// --- Grammar Level Filter ---
+var _grammarItemsAll = null;
+var _grammarStructuresAll = null;
+var grammarLevelFilter = null;
+
+function initGrammarLevelFilter() {
+  if (_grammarItemsAll !== null && _grammarItemsAll.length > 0) return;
+  if (!grammarItems || grammarItems.length === 0) return;
+  _grammarItemsAll = grammarItems.slice();
+  _grammarStructuresAll = grammarStructures.slice();
+  var prefixes = ['m4', 'm3', 'm2', 'm1'];
+  var highest = null;
+  for (var i = 0; i < prefixes.length; i++) {
+    if (_grammarItemsAll.some(function(it) { return (it.id||'').indexOf(prefixes[i] + '-') === 0; })) {
+      highest = prefixes[i]; break;
+    }
+  }
+  setGrammarLevelFilter(highest);
+}
+
+function setGrammarLevelFilter(level) {
+  grammarLevelFilter = level;
+  if (!_grammarItemsAll) return;
+  if (!level) {
+    grammarItems = _grammarItemsAll.slice();
+    grammarStructures = _grammarStructuresAll.slice();
+  } else {
+    grammarItems = _grammarItemsAll.filter(function(it) { return (it.id||'').indexOf(level + '-') === 0; });
+    grammarStructures = _grammarStructuresAll.filter(function(s) { return (s.id||'').indexOf(level + '-') === 0; });
+  }
+}
+
+function getAvailableGrammarLevels() {
+  if (!_grammarItemsAll) return [];
+  var levels = [];
+  ['m1','m2','m3','m4'].forEach(function(p) {
+    if (_grammarItemsAll.some(function(it) { return (it.id||'').indexOf(p + '-') === 0; })) levels.push(p);
+  });
+  return levels;
+}
+
+function renderGrammarLevelSelector() {
+  initGrammarLevelFilter();
+  var levels = getAvailableGrammarLevels();
+  if (levels.length <= 1) return '';
+  var currentGrade = levels[levels.length - 1];
+  var labelFor = function(lv) {
+    var labels = { m1: 'Grade 1', m2: 'Grade 2', m3: 'Grade 3', m4: 'Grade 4' };
+    var base = labels[lv] || lv;
+    if (lv === currentGrade) return '\uD83D\uDCD6 ' + base + ' (Current)';
+    return '\uD83D\uDD01 ' + base + ' Review';
+  };
+  var html = '<div style="background:var(--card);border:1.5px solid var(--card-border);border-radius:12px;padding:0.5rem 0.6rem;margin-bottom:0.8rem;">';
+  html += '<div style="font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:0.4rem;text-align:center;">Grammar Level</div>';
+  html += '<div style="display:flex;gap:4px;">';
+  levels.forEach(function(lv) {
+    var active = grammarLevelFilter === lv;
+    var style = active
+      ? 'background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 2px 6px rgba(0,0,0,0.1);'
+      : 'background:transparent;color:var(--text);border-color:var(--card-border);';
+    html += '<button style="flex:1;padding:8px 4px;border-radius:10px;font-size:0.72rem;font-weight:700;border:2px solid var(--card-border);cursor:pointer;transition:all 0.15s;' + style + '" onclick="onGrammarLevelChange(\'' + lv + '\')">' + labelFor(lv) + '</button>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function onGrammarLevelChange(level) {
+  setGrammarLevelFilter(level);
+  if (typeof renderGrammarUnits === 'function') renderGrammarUnits();
 }
 
 // --- Mode Select Screen ---
@@ -8476,6 +8547,7 @@ function startGrammarPracticeMore(type) {
 }
 
 function renderGrammarUnits() {
+  initGrammarLevelFilter();
   // Group structures by unit
   const unitMap = {};
   grammarStructures.forEach(s => {
@@ -8488,6 +8560,7 @@ function renderGrammarUnits() {
   // Build unit list with tabs
   let html = '<div class="progress-nav"><button class="btn btn-secondary" onclick="goHome()">← Back</button><span class="nav-title">Practice Grammar</span></div>';
   html += renderGrammarPracticeTabs('topics');
+  html += renderGrammarLevelSelector();
   html += '<div style="display:flex;flex-direction:column;gap:8px;padding:0.3rem 0;">';
   const m1UnitNames = {
     1:'Time for School', 2:'At the Zoo', 3:'My Family', 4:'After School',
@@ -9471,8 +9544,9 @@ function renderGrammarDailyCard() {
 
 // --- Grammar Reference ---
 function showGrammarReference() {
+  initGrammarLevelFilter();
   const showDe = typeof SHOW_DE_FEEDBACK !== 'undefined' ? SHOW_DE_FEEDBACK : true;
-  let html = '';
+  let html = renderGrammarLevelSelector();
   grammarStructures.forEach(s => {
     const practiceBtn = '<button class="grammar-practice-full-btn" onclick="showGrammarFormatSelection(\'' + s.id + '\', \'reference\')">\u25B6 Practice this</button>';
     html += '<div class="grammar-ref-card">';
