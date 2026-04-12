@@ -7902,7 +7902,7 @@ async function loadBattleHistory(filter) {
 function loadGrammarData() {
   if (grammarDataLoaded) return;
   grammarDataLoaded = true;
-  initGrammarLevelFilter();
+  // initGrammarLevelFilter is called lazily from renderGrammarUnits/showGrammarReference
 }
 
 // --- Grammar Level Filter ---
