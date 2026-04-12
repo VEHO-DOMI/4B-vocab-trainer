@@ -2646,6 +2646,33 @@ const LEVELS = [
   {level:24,xp:90000,name:'Grandmaster',zone:'prestige',prestige:4,vibe:'mythic tier'},
   {level:25,xp:120000,name:'Grandmaster',zone:'prestige',prestige:5,vibe:'ultimate master'},
 ];
+const GRAMMAR_LEVELS = [
+  {level:1,xp:0,name:'Rule Noob',zone:'bronze',vibe:'just spawned in'},
+  {level:2,xp:50,name:'Comma Kid',zone:'bronze',vibe:'finding the basics'},
+  {level:3,xp:120,name:'Tense Cadet',zone:'bronze',vibe:'past, present, future...'},
+  {level:4,xp:220,name:'Sentence Slicer',zone:'bronze',vibe:'chopping up sentences'},
+  {level:5,xp:350,name:'Grammar Gremlin',zone:'bronze',vibe:'causing chaos with rules'},
+  {level:6,xp:500,name:'Clause Cruncher',zone:'silver',vibe:'eating clauses for breakfast'},
+  {level:7,xp:700,name:'Syntax Sniper',zone:'silver',vibe:'every shot hits'},
+  {level:8,xp:950,name:'Rule Breaker',zone:'silver',vibe:'knows rules to break them'},
+  {level:9,xp:1250,name:'Grammar Gladiator',zone:'silver',vibe:'arena-tested'},
+  {level:10,xp:1600,name:'Tense Titan',zone:'silver',vibe:'master of time'},
+  {level:11,xp:2000,name:'Error Assassin',zone:'gold',vibe:'hunts mistakes for fun'},
+  {level:12,xp:2700,name:'Grammar Goat',zone:'gold',vibe:'greatest of all time'},
+  {level:13,xp:3500,name:'Sentence Sorcerer',zone:'gold',vibe:'casting grammar spells'},
+  {level:14,xp:5000,name:'Punctuation Pirate',zone:'gold',vibe:'stealing commas everywhere'},
+  {level:15,xp:6500,name:'Rule Overlord',zone:'gold',vibe:'all rules bow to you'},
+  {level:16,xp:8000,name:'Grammar Dragon',zone:'diamond',vibe:'breathing grammar fire'},
+  {level:17,xp:11000,name:'Clause Commander',zone:'diamond',vibe:'commanding the syntax fleet'},
+  {level:18,xp:15000,name:'Grammar Galaxy',zone:'diamond',vibe:'a universe of rules'},
+  {level:19,xp:20000,name:'Language Lich',zone:'diamond',vibe:'undying grammar power'},
+  {level:20,xp:30000,name:'Grammar God',zone:'diamond',vibe:'GG'},
+  {level:21,xp:30000,name:'Grammar God',zone:'prestige',prestige:1,vibe:'prestige unlocked'},
+  {level:22,xp:45000,name:'Grammar God',zone:'prestige',prestige:2,vibe:'rising legend'},
+  {level:23,xp:65000,name:'Grammar God',zone:'prestige',prestige:3,vibe:'elite status'},
+  {level:24,xp:90000,name:'Grammar God',zone:'prestige',prestige:4,vibe:'mythic tier'},
+  {level:25,xp:120000,name:'Grammar God',zone:'prestige',prestige:5,vibe:'ultimate master'},
+];
 function getLevelsForMode(mode) { return mode === 'grammar' ? GRAMMAR_LEVELS : LEVELS; }
 function getLevel(xp, mode) {
   const levels = mode ? getLevelsForMode(mode) : (state.mode === 'grammar' ? GRAMMAR_LEVELS : LEVELS);
