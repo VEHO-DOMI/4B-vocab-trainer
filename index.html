@@ -1503,6 +1503,76 @@ body.playing .header-container { display: none; }
 .chat-sim-reply-label { font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-top:0.5rem; margin-bottom:0.2rem; }
 @keyframes chatBubbleIn { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:none;} }
 
+/* === Memory Match (G4 — 12 pairs, 4x6 grid, B1) === */
+.mm-screen { padding: 0.8rem; max-width: 680px; margin: 0 auto; }
+.mm-header { display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-bottom:0.8rem; flex-wrap:wrap; }
+.mm-stats { display:flex; gap:0.8rem; font-size:0.86rem; font-weight:600; color:var(--text); }
+.mm-stat-label { color:var(--muted); font-weight:500; margin-right:0.2rem; }
+.mm-grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:0.42rem; }
+.mm-card { aspect-ratio: 3/4; background:var(--card); border:2px solid var(--card-border); border-radius:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; text-align:center; padding:0.3rem; font-weight:600; font-size:0.72rem; line-height:1.15; color:var(--text); transition:transform 0.2s, background 0.2s, border-color 0.2s, opacity 0.3s; position:relative; user-select:none; overflow:hidden; word-break:break-word; hyphens:auto; }
+.mm-card .mm-label { font-size:0.58rem; font-weight:700; text-transform:uppercase; letter-spacing:0.4px; color:var(--muted); position:absolute; top:3px; left:5px; }
+.mm-card.hidden { background:linear-gradient(135deg, var(--accent), var(--accent-deep, var(--accent))); color:transparent; border-color:var(--accent); }
+.mm-card.hidden .mm-label { color:rgba(255,255,255,0.9); }
+.mm-card.hidden::after { content:"?"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:white; font-size:1.6rem; font-weight:800; }
+.mm-card.flipped { animation: mmFlip 0.35s ease; }
+@keyframes mmFlip { 0% { transform: rotateY(0); } 50% { transform: rotateY(90deg); } 100% { transform: rotateY(0); } }
+.mm-card.selected { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-glow, rgba(147,51,234,0.3)); transform:scale(1.04); }
+.mm-card.matched { background: var(--correct-glow, #d4f5db); border-color: var(--correct, #16a34a); color: var(--correct, #16a34a); animation: mmMatch 0.5s ease; }
+.mm-card.mismatch { border-color: var(--wrong, #dc2626); background: var(--wrong-glow, #fce4e4); animation: mmShake 0.35s ease; }
+.mm-card.gone { opacity: 0; pointer-events: none; transform: scale(0.6); }
+@keyframes mmMatch { 0% { transform:scale(1); } 40% { transform:scale(1.12); } 100% { transform:scale(1); } }
+@keyframes mmShake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-5px); } 50% { transform:translateX(5px); } 75% { transform:translateX(-3px); } }
+.mm-done { text-align:center; padding:1.8rem 1rem; }
+.mm-done h2 { margin:0 0 0.5rem 0; font-size:1.4rem; color:var(--accent); }
+.mm-done-stats { font-size:1rem; color:var(--text); margin-bottom:1.2rem; line-height:1.6; }
+@media (max-width: 400px) { .mm-grid { gap:0.3rem; } .mm-card { font-size:0.66rem; padding:0.25rem; border-radius:9px; } }
+
+/* === Spelling Bee (G4 — phrase-aware, up to 30 chars) === */
+.sb-screen { padding: 0.8rem; max-width: 620px; margin: 0 auto; }
+.sb-header { display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-bottom:0.8rem; }
+.sb-stats { display:flex; gap:0.8rem; font-size:0.88rem; font-weight:600; color:var(--text); }
+.sb-prompt-card { background:var(--card); border:2px solid var(--card-border); border-radius:16px; padding:1.1rem 1rem; margin-bottom:1rem; text-align:center; }
+.sb-prompt-label { font-size:0.7rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--muted); font-weight:700; margin-bottom:0.4rem; }
+.sb-prompt-german { font-size:1.25rem; font-weight:700; color:var(--accent); margin-bottom:0.4rem; line-height:1.3; }
+.sb-prompt-hint { font-size:0.82rem; color:var(--muted); font-style:italic; line-height:1.4; }
+.sb-answer-row { display:flex; flex-wrap:wrap; gap:0.3rem 0.6rem; justify-content:center; align-items:center; min-height:52px; padding:0.5rem; margin-bottom:0.6rem; background:var(--bg); border:2px dashed var(--card-border); border-radius:12px; }
+.sb-word { display:inline-flex; flex-wrap:nowrap; gap:0.25rem; align-items:center; }
+.sb-slot { width:36px; height:44px; display:flex; align-items:center; justify-content:center; background:var(--card); border:2px solid var(--card-border); border-radius:9px; font-size:1.1rem; font-weight:800; text-transform:uppercase; cursor:pointer; transition:transform 0.15s, border-color 0.2s; flex-shrink:0; }
+.sb-slot.filled { background:var(--accent-glow, rgba(147,51,234,0.15)); border-color:var(--accent); color:var(--accent); }
+.sb-slot.filled:hover { transform:translateY(-2px); }
+.sb-slot.filled.reveal { background:var(--correct-glow, #d4f5db); border-color:var(--correct, #16a34a); color:var(--correct, #16a34a); cursor:default; }
+.sb-slot.hyphen { width:auto; min-width:12px; border:none; background:transparent; color:var(--muted); font-weight:500; padding:0 2px; }
+.sb-slot.apos { width:auto; min-width:10px; border:none; background:transparent; color:var(--muted); font-weight:500; padding:0 1px; }
+.sb-letters { display:flex; flex-wrap:wrap; gap:0.35rem; justify-content:center; margin-bottom:0.8rem; }
+.sb-letter-btn { width:40px; height:46px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg, var(--card) 0%, var(--bg) 100%); border:2px solid var(--card-border); border-radius:9px; font-size:1.2rem; font-weight:800; text-transform:uppercase; cursor:pointer; transition:transform 0.15s, background 0.2s; font-family:inherit; color:var(--text); }
+.sb-letter-btn:hover, .sb-letter-btn:active { transform:translateY(-3px); border-color:var(--accent); }
+.sb-letter-btn.used { opacity:0.25; pointer-events:none; transform:scale(0.9); }
+.sb-actions { display:flex; gap:0.5rem; flex-wrap:wrap; }
+.sb-actions .btn { flex:1; min-width:110px; }
+.sb-feedback { text-align:center; padding:0.8rem; border-radius:12px; margin-bottom:0.6rem; font-weight:700; font-size:0.92rem; animation: sbFbIn 0.3s ease; line-height:1.4; }
+.sb-feedback.correct { background:var(--correct-glow, #d4f5db); color:var(--correct, #16a34a); border:2px solid var(--correct, #16a34a); }
+.sb-feedback.wrong { background:var(--wrong-glow, #fce4e4); color:var(--wrong, #dc2626); border:2px solid var(--wrong, #dc2626); }
+@keyframes sbFbIn { from{opacity:0;transform:translateY(-8px);} to{opacity:1;transform:none;} }
+
+/* === Word Hunt (G4 — B1 themes, 8 rounds, 3x3) === */
+.wh-screen { padding: 0.8rem; max-width: 600px; margin: 0 auto; }
+.wh-header { display:flex; justify-content:space-between; align-items:center; gap:0.6rem; margin-bottom:0.8rem; }
+.wh-stats { display:flex; gap:0.8rem; font-size:0.88rem; font-weight:600; color:var(--text); }
+.wh-prompt-card { background:linear-gradient(135deg, var(--accent-glow, rgba(147,51,234,0.12)), transparent); border:2px solid var(--accent); border-radius:14px; padding:0.9rem 1rem; margin-bottom:1rem; text-align:center; }
+.wh-prompt-label { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--muted); font-weight:700; margin-bottom:0.3rem; }
+.wh-prompt-text { font-size:1.05rem; font-weight:700; color:var(--text); line-height:1.3; }
+.wh-prompt-target { color:var(--accent); font-size:1.18rem; }
+.wh-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem; margin-bottom:0.8rem; }
+.wh-tile { aspect-ratio: 4/3; background:var(--card); border:2px solid var(--card-border); border-radius:12px; display:flex; align-items:center; justify-content:center; text-align:center; padding:0.4rem; font-weight:600; font-size:0.82rem; line-height:1.2; color:var(--text); cursor:pointer; transition:all 0.2s; user-select:none; word-break:break-word; }
+.wh-tile:hover, .wh-tile:active { border-color:var(--accent); transform:scale(1.03); }
+.wh-tile.correct { background: var(--correct-glow, #d4f5db); border-color: var(--correct, #16a34a); color: var(--correct, #16a34a); animation: mmMatch 0.4s ease; pointer-events:none; }
+.wh-tile.wrong { background: var(--wrong-glow, #fce4e4); border-color: var(--wrong, #dc2626); color: var(--wrong, #dc2626); animation: mmShake 0.35s ease; pointer-events:none; }
+.wh-tile.missed { border-color: var(--wrong, #dc2626); background: var(--wrong-glow, #fce4e4); opacity:0.7; }
+.wh-feedback { text-align:center; padding:0.7rem; border-radius:10px; font-weight:600; font-size:0.9rem; margin-bottom:0.6rem; display:none; }
+.wh-feedback.show { display:block; animation: sbFbIn 0.3s ease; }
+.wh-feedback.correct { background:var(--correct-glow, #d4f5db); color:var(--correct, #16a34a); }
+.wh-feedback.wrong { background:var(--wrong-glow, #fce4e4); color:var(--wrong, #dc2626); }
+
 </style>
 </head>
 <body>
@@ -2087,6 +2157,75 @@ body.playing .header-container { display: none; }
   <div class="flashcard-actions" id="flashcard-actions">
     <button class="btn flashcard-btn-again" onclick="flashcardAgain()">&#10007; Study again</button>
     <button class="btn flashcard-btn-got-it" onclick="flashcardGotIt()">&#10003; Got it</button>
+  </div>
+</div>
+
+<div id="memory-match-screen" class="screen">
+  <div class="mm-screen">
+    <div class="mm-header">
+      <button class="btn btn-secondary btn-small" onclick="endMemoryMatch()">&larr; Done</button>
+      <div class="mm-stats">
+        <div><span class="mm-stat-label">Pairs:</span><span id="mm-pairs">0/0</span></div>
+        <div><span class="mm-stat-label">Moves:</span><span id="mm-moves">0</span></div>
+      </div>
+    </div>
+    <div id="mm-grid" class="mm-grid"></div>
+    <div id="mm-done" class="mm-done" style="display:none;">
+      <h2 id="mm-done-title">&#127881; Perfect!</h2>
+      <div class="mm-done-stats" id="mm-done-stats"></div>
+      <button class="btn btn-primary" onclick="startMemoryMatchRound()">Play Again</button>
+      <button class="btn btn-secondary" style="margin-left:0.5rem;" onclick="endMemoryMatch()">Done</button>
+    </div>
+  </div>
+</div>
+
+<div id="spelling-bee-screen" class="screen">
+  <div class="sb-screen">
+    <div class="sb-header">
+      <button class="btn btn-secondary btn-small" id="sb-done-btn" onclick="endSpellingBee()">&larr; Done</button>
+      <div class="sb-stats">
+        <div><span class="mm-stat-label">Word:</span><span id="sb-idx">0/0</span></div>
+        <div><span class="mm-stat-label">Correct:</span><span id="sb-correct">0</span></div>
+      </div>
+    </div>
+    <div class="sb-prompt-card">
+      <div class="sb-prompt-label">Translate &amp; spell</div>
+      <div class="sb-prompt-german" id="sb-german"></div>
+      <div class="sb-prompt-hint" id="sb-hint"></div>
+    </div>
+    <div id="sb-feedback" class="sb-feedback" style="display:none;"></div>
+    <div id="sb-answer-row" class="sb-answer-row"></div>
+    <div id="sb-letters" class="sb-letters"></div>
+    <div class="sb-actions" id="sb-input-actions">
+      <button class="btn btn-secondary" onclick="spellingBeeBackspace()">&#9003;</button>
+      <button class="btn btn-secondary" onclick="spellingBeeClear()">Clear</button>
+      <button class="btn btn-secondary" id="sb-hint-btn" onclick="spellingBeeHint()">Hint (-3 XP)</button>
+      <button class="btn btn-primary" onclick="spellingBeeCheck()">Check &#10003;</button>
+    </div>
+    <div class="sb-actions" id="sb-continue-actions" style="display:none;">
+      <button class="btn btn-primary btn-block" onclick="spellingBeeContinue()">Continue &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<div id="word-hunt-screen" class="screen">
+  <div class="wh-screen">
+    <div class="wh-header">
+      <button class="btn btn-secondary btn-small" onclick="endWordHunt()">&larr; Done</button>
+      <div class="wh-stats">
+        <div><span class="mm-stat-label">Round:</span><span id="wh-round">1/8</span></div>
+        <div><span class="mm-stat-label">Score:</span><span id="wh-score">0</span></div>
+      </div>
+    </div>
+    <div class="wh-prompt-card">
+      <div class="wh-prompt-label">Tap all that match</div>
+      <div class="wh-prompt-text" id="wh-prompt-text"></div>
+    </div>
+    <div id="wh-feedback" class="wh-feedback"></div>
+    <div id="wh-grid" class="wh-grid"></div>
+    <div style="text-align:center; margin-top:0.8rem;">
+      <button class="btn btn-primary" id="wh-next-btn" style="display:none;" onclick="wordHuntNext()">Next Round &rarr;</button>
+    </div>
   </div>
 </div>
 
@@ -4509,6 +4648,18 @@ function openPracticeSetup() {
           <span class="mode-icon">📇</span>
           <div class="mode-info"><div class="mode-name">Flashcards</div><div class="mode-desc">Study mode, no pressure</div></div>
         </button>
+        <button class="mode-card" data-mode="match" onclick="selectMode(this)">
+          <span class="mode-icon">🧠</span>
+          <div class="mode-info"><div class="mode-name">Memory Match</div><div class="mode-desc">12 pairs — match EN &harr; DE, move-efficient wins bonus XP</div></div>
+        </button>
+        <button class="mode-card" data-mode="spell" onclick="selectMode(this)">
+          <span class="mode-icon">🐝</span>
+          <div class="mode-info"><div class="mode-name">Spelling Bee</div><div class="mode-desc">Spell B1 words &amp; phrases — up to 18 rounds</div></div>
+        </button>
+        <button class="mode-card" data-mode="hunt" onclick="selectMode(this)">
+          <span class="mode-icon">🔍</span>
+          <div class="mode-info"><div class="mode-name">Word Hunt</div><div class="mode-desc">Pick every B1 word that fits the theme — 8 rounds</div></div>
+        </button>
       </div>
       <div id="type-select-wrap" class="type-select-wrap">
         <div class="type-select-label">Exercise Type</div>
@@ -4598,7 +4749,7 @@ function selectMode(btn) {
   btn.classList.add('selected');
   selectedMode = btn.dataset.mode;
   const typeWrap = document.getElementById('type-select-wrap');
-  if (selectedMode === 'mc' || selectedMode === 'flashcards') { typeWrap.style.display = 'none'; }
+  if (selectedMode === 'mc' || selectedMode === 'flashcards' || selectedMode === 'match' || selectedMode === 'spell' || selectedMode === 'hunt') { typeWrap.style.display = 'none'; }
   else { typeWrap.style.display = ''; }
 }
 
@@ -4609,6 +4760,9 @@ function practiceSetupGo() {
     case 'sprint': startSprint(); break;
     case 'speed': startSpeedRound(); break;
     case 'flashcards': startFlashcards(); break;
+    case 'match': startMemoryMatch(); break;
+    case 'spell': startSpellingBee(); break;
+    case 'hunt': startWordHunt(); break;
     case 'mc': case 'full': default: startPractice(); break;
   }
 }
@@ -5093,6 +5247,539 @@ async function endFlashcards() {
     retryBtn.textContent = '\uD83D\uDCC7 Continue studying remaining cards';
     retryBtn.onclick = () => { showScreen('flashcard-screen'); showFlashcard(); };
   }
+}
+
+// =========================================================
+// ========== NEW VOCAB MODES: shared helpers ==============
+// =========================================================
+function collectVocabFromSelectedUnits() {
+  const pool = [];
+  state.selectedSources.forEach(src => {
+    if (vocabData[src]) vocabData[src].forEach(w => pool.push(Object.assign({}, w, { source: src })));
+  });
+  return pool;
+}
+
+function awardVocabXP(n, label) {
+  if (!n || n <= 0) return;
+  if (typeof studentsRef !== 'undefined' && studentsRef && state.studentId) {
+    ffWrite(studentsRef.doc(state.studentId).update({
+      xp: firebase.firestore.FieldValue.increment(n),
+      lastActive: firebase.firestore.FieldValue.serverTimestamp()
+    }), label || 'vocabXP');
+    if (state.studentData) state.studentData.xp = (state.studentData.xp || 0) + n;
+  }
+  if (typeof showBonusNotification === 'function') {
+    showBonusNotification('+' + n + ' XP' + (label ? ' — ' + label : ''));
+  }
+}
+
+// =========================================================
+// ========== MEMORY MATCH (G4 — 12 pairs, B1) =============
+// =========================================================
+let mmState = { pairs: [], cards: [], first: null, second: null, moves: 0, matched: 0, startTime: 0, busy: false, poolSize: 12 };
+
+function startMemoryMatch() {
+  const pool = collectVocabFromSelectedUnits();
+  if (pool.length < 8) {
+    alert('Too few words — pick more units (need at least 8).');
+    return;
+  }
+  mmState.poolSize = Math.min(12, pool.length);
+  mmState._pool = pool;
+  document.body.classList.add('playing');
+  showScreen('memory-match-screen');
+  startMemoryMatchRound();
+}
+
+function startMemoryMatchRound() {
+  const pool = mmState._pool || collectVocabFromSelectedUnits();
+  shuffle(pool);
+  const picks = pool.slice(0, mmState.poolSize);
+  const cards = [];
+  picks.forEach((w, i) => {
+    cards.push({ pairId: i, kind: 'en', text: w.w, word: w });
+    cards.push({ pairId: i, kind: 'de', text: (w.g || '').split(',')[0].split(';')[0].trim(), word: w });
+  });
+  shuffle(cards);
+  mmState.pairs = picks;
+  mmState.cards = cards;
+  mmState.first = null; mmState.second = null; mmState.moves = 0; mmState.matched = 0;
+  mmState.startTime = Date.now(); mmState.busy = false;
+  renderMemoryMatch();
+  document.getElementById('mm-done').style.display = 'none';
+  document.getElementById('mm-grid').style.display = '';
+}
+
+function renderMemoryMatch() {
+  const grid = document.getElementById('mm-grid');
+  grid.innerHTML = '';
+  grid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+  mmState.cards.forEach((c, idx) => {
+    const el = document.createElement('div');
+    el.className = 'mm-card hidden';
+    el.dataset.idx = idx;
+    el.dataset.pair = c.pairId;
+    el.dataset.kind = c.kind;
+    const label = c.kind === 'en' ? 'EN' : 'DE';
+    el.innerHTML = '<span class="mm-label">' + label + '</span>' + escapeHtml(c.text);
+    el.onclick = () => mmFlip(idx);
+    grid.appendChild(el);
+  });
+  updateMemoryMatchStats();
+}
+
+function updateMemoryMatchStats() {
+  document.getElementById('mm-pairs').textContent = mmState.matched + '/' + mmState.pairs.length;
+  document.getElementById('mm-moves').textContent = mmState.moves;
+}
+
+function mmFlip(idx) {
+  if (mmState.busy) return;
+  const el = document.querySelector('.mm-card[data-idx="'+idx+'"]');
+  if (!el || !el.classList.contains('hidden')) return;
+  el.classList.remove('hidden');
+  el.classList.add('flipped', 'selected');
+  if (!mmState.first) { mmState.first = { idx: idx, el: el, card: mmState.cards[idx] }; return; }
+  if (mmState.first.idx === idx) return;
+  mmState.second = { idx: idx, el: el, card: mmState.cards[idx] };
+  mmState.moves++;
+  updateMemoryMatchStats();
+  const a = mmState.first, b = mmState.second;
+  const isMatch = a.card.pairId === b.card.pairId && a.card.kind !== b.card.kind;
+  mmState.busy = true;
+  if (isMatch) {
+    setTimeout(() => {
+      a.el.classList.remove('selected'); b.el.classList.remove('selected');
+      a.el.classList.add('matched'); b.el.classList.add('matched');
+      mmState.matched++;
+      updateMemoryMatchStats();
+      setTimeout(() => { a.el.classList.add('gone'); b.el.classList.add('gone'); }, 400);
+      mmState.first = null; mmState.second = null; mmState.busy = false;
+      if (mmState.matched >= mmState.pairs.length) setTimeout(finishMemoryMatch, 700);
+    }, 450);
+  } else {
+    setTimeout(() => {
+      a.el.classList.add('mismatch'); b.el.classList.add('mismatch');
+      setTimeout(() => {
+        a.el.classList.remove('selected','mismatch','flipped');
+        b.el.classList.remove('selected','mismatch','flipped');
+        a.el.classList.add('hidden'); b.el.classList.add('hidden');
+        mmState.first = null; mmState.second = null; mmState.busy = false;
+      }, 550);
+    }, 500);
+  }
+}
+
+function finishMemoryMatch() {
+  const elapsed = Math.round((Date.now() - mmState.startTime) / 1000);
+  const pairs = mmState.pairs.length;
+  // G4 XP scale: 3 per pair, efficiency (moves ≤ pairs*1.4) +12, speed (≤120s & efficient) +8
+  const baseXP = pairs * 3;
+  const efficient = mmState.moves <= Math.ceil(pairs * 1.4);
+  const speedy = elapsed <= 120;
+  const efficiencyXP = efficient ? 12 : 0;
+  const speedXP = (efficient && speedy) ? 8 : 0;
+  const totalXP = baseXP + efficiencyXP + speedXP;
+  document.getElementById('mm-grid').style.display = 'none';
+  document.getElementById('mm-done').style.display = '';
+  document.getElementById('mm-done-title').textContent = (efficient && speedy) ? '⚡ Sharp Memory!' : (efficient ? '🌟 Efficient!' : '🎉 All Matched!');
+  const bonusParts = [];
+  if (efficiencyXP) bonusParts.push('+' + efficiencyXP + ' efficient');
+  if (speedXP) bonusParts.push('+' + speedXP + ' speed');
+  document.getElementById('mm-done-stats').innerHTML =
+    'Pairs: <strong>' + pairs + '</strong><br>' +
+    'Moves: <strong>' + mmState.moves + '</strong><br>' +
+    'Time: <strong>' + elapsed + 's</strong><br>' +
+    '<span style="color:var(--accent);font-weight:700;">+' + totalXP + ' XP' + (bonusParts.length ? ' (' + bonusParts.join(', ') + ')' : '') + '</span>';
+  awardVocabXP(totalXP, 'Memory Match');
+}
+
+function endMemoryMatch() {
+  document.body.classList.remove('playing');
+  showHomeScreen();
+}
+
+// =========================================================
+// ========== SPELLING BEE (G4 — phrase-aware, 30ch) =======
+// =========================================================
+let sbState = { deck: [], idx: 0, correct: 0, wrong: 0, currentWord: null, placed: [], letters: [], hintUsed: false, answered: false };
+
+function sbNormaliseTarget(w) {
+  // Use cf (correct form) if present, else w. Strip articles, "sth./sb.", parens, trailing punctuation.
+  let base = w.cf ? w.cf : (w.w || '');
+  base = base.replace(/\s*\([^)]*\)\s*/g, ' ');          // (xyz)
+  base = base.replace(/\s+(sth\.?|sb\.?|s\.o\.?|s\.th\.?)\b/gi, ''); // sth./sb.
+  base = base.replace(/^(to|a|an|the)\s+/i, '');
+  base = base.replace(/[.!?,;:]+$/, '');
+  base = base.replace(/\s+/g, ' ').trim();
+  return base;
+}
+
+function startSpellingBee() {
+  const pool = collectVocabFromSelectedUnits().filter(w => {
+    const t = sbNormaliseTarget(w);
+    // Must have letters, 3-30 chars, and no apostrophe contractions that are hard to build
+    if (t.length < 3 || t.length > 30) return false;
+    if (!/[a-zA-Z]/.test(t)) return false;
+    return true;
+  });
+  if (pool.length < 6) { alert('Too few suitable words — pick more units.'); return; }
+  shuffle(pool);
+  sbState.deck = pool.slice(0, Math.min(18, pool.length));
+  sbState.idx = 0; sbState.correct = 0; sbState.wrong = 0;
+  document.body.classList.add('playing');
+  showScreen('spelling-bee-screen');
+  showSpellingBeeWord();
+}
+
+function showSpellingBeeWord() {
+  if (sbState.idx >= sbState.deck.length) { finishSpellingBee(); return; }
+  const w = sbState.deck[sbState.idx];
+  sbState.currentWord = w;
+  sbState.hintUsed = false;
+  sbState.answered = false;
+  const target = sbNormaliseTarget(w);
+  sbState.placed = [];
+  const letterChars = [];
+  for (const ch of target) {
+    if (/[a-zA-Z]/.test(ch)) letterChars.push(ch.toUpperCase());
+  }
+  // G4 decoys: 2 for ≥5ch, 3 for ≥8ch, 4 for ≥12ch — harder than G1-G3
+  const targetLen = target.replace(/[^a-zA-Z]/g, '').length;
+  const decoyCount = targetLen >= 12 ? 4 : (targetLen >= 8 ? 3 : (targetLen >= 5 ? 2 : 0));
+  if (decoyCount > 0) {
+    const abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let added = 0, tries = 0;
+    while (added < decoyCount && tries < 40) {
+      const c = abc[Math.floor(Math.random()*abc.length)];
+      if (!letterChars.includes(c)) { letterChars.push(c); added++; }
+      tries++;
+    }
+  }
+  shuffle(letterChars);
+  sbState.letters = letterChars.map((c, i) => ({ idx: i, char: c, used: false }));
+  document.getElementById('sb-german').textContent = (w.g || '').split(',')[0].split(';')[0].trim();
+  document.getElementById('sb-hint').textContent = w.d || '';
+  document.getElementById('sb-idx').textContent = (sbState.idx + 1) + '/' + sbState.deck.length;
+  document.getElementById('sb-correct').textContent = sbState.correct;
+  const fb = document.getElementById('sb-feedback');
+  fb.style.display = 'none'; fb.className = 'sb-feedback';
+  document.getElementById('sb-input-actions').style.display = '';
+  document.getElementById('sb-continue-actions').style.display = 'none';
+  document.getElementById('sb-letters').style.display = '';
+  renderSpellingBee();
+}
+
+function renderSpellingBee() {
+  const target = sbNormaliseTarget(sbState.currentWord);
+  const answerRow = document.getElementById('sb-answer-row');
+  answerRow.innerHTML = '';
+  const words = target.split(' ');
+  let letterSlotCount = 0;
+  const revealAll = sbState.answered;
+  const correctUpper = target.replace(/[^a-zA-Z]/g, '').toUpperCase();
+  words.forEach((wordChunk) => {
+    const wordGroup = document.createElement('div');
+    wordGroup.className = 'sb-word';
+    for (let i = 0; i < wordChunk.length; i++) {
+      const ch = wordChunk[i];
+      if (ch === '-') {
+        const hy = document.createElement('div'); hy.className = 'sb-slot hyphen'; hy.textContent = '-'; wordGroup.appendChild(hy);
+      } else if (ch === "'" || ch === '\u2019') {
+        const ap = document.createElement('div'); ap.className = 'sb-slot apos'; ap.textContent = '\u2019'; wordGroup.appendChild(ap);
+      } else if (/[a-zA-Z]/.test(ch)) {
+        const slot = document.createElement('div');
+        slot.className = 'sb-slot';
+        slot.dataset.pos = letterSlotCount;
+        const placed = sbState.placed[letterSlotCount];
+        if (revealAll) {
+          slot.textContent = correctUpper[letterSlotCount] || '';
+          slot.classList.add('filled', 'reveal');
+        } else if (placed) {
+          slot.textContent = placed.char;
+          slot.classList.add('filled');
+          const pos = letterSlotCount;
+          slot.onclick = () => spellingBeeRemoveAt(pos);
+        } else {
+          slot.textContent = '';
+        }
+        wordGroup.appendChild(slot);
+        letterSlotCount++;
+      }
+    }
+    answerRow.appendChild(wordGroup);
+  });
+  const lettersRow = document.getElementById('sb-letters');
+  lettersRow.innerHTML = '';
+  if (!revealAll) {
+    sbState.letters.forEach(L => {
+      const btn = document.createElement('button');
+      btn.className = 'sb-letter-btn' + (L.used ? ' used' : '');
+      btn.textContent = L.char;
+      btn.onclick = () => spellingBeePlace(L.idx);
+      lettersRow.appendChild(btn);
+    });
+  }
+}
+
+function spellingBeePlace(letterIdx) {
+  if (sbState.answered) return;
+  const L = sbState.letters[letterIdx];
+  if (!L || L.used) return;
+  L.used = true;
+  sbState.placed.push({ letterIdx: letterIdx, char: L.char });
+  renderSpellingBee();
+}
+
+function spellingBeeRemoveAt(pos) {
+  if (sbState.answered) return;
+  const p = sbState.placed[pos];
+  if (!p) return;
+  sbState.letters[p.letterIdx].used = false;
+  sbState.placed.splice(pos, 1);
+  renderSpellingBee();
+}
+
+function spellingBeeBackspace() {
+  if (sbState.answered) return;
+  if (sbState.placed.length === 0) return;
+  const p = sbState.placed.pop();
+  sbState.letters[p.letterIdx].used = false;
+  renderSpellingBee();
+}
+
+function spellingBeeClear() {
+  if (sbState.answered) return;
+  sbState.placed.forEach(p => { sbState.letters[p.letterIdx].used = false; });
+  sbState.placed = [];
+  renderSpellingBee();
+}
+
+function spellingBeeHint() {
+  if (sbState.answered || sbState.hintUsed) return;
+  sbState.hintUsed = true;
+  const target = sbNormaliseTarget(sbState.currentWord).replace(/[^a-zA-Z]/g, '').toUpperCase();
+  if (sbState.placed.length >= target.length) return;
+  const nextChar = target[sbState.placed.length];
+  const letterIdx = sbState.letters.findIndex(L => !L.used && L.char === nextChar);
+  if (letterIdx >= 0) spellingBeePlace(letterIdx);
+  if (typeof studentsRef !== 'undefined' && studentsRef && state.studentId) {
+    ffWrite(studentsRef.doc(state.studentId).update({ xp: firebase.firestore.FieldValue.increment(-3) }), 'sbHint');
+    if (state.studentData) state.studentData.xp = Math.max(0, (state.studentData.xp||0) - 3);
+  }
+}
+
+function spellingBeeCheck() {
+  if (sbState.answered) return;
+  const target = sbNormaliseTarget(sbState.currentWord).replace(/[^a-zA-Z]/g, '').toUpperCase();
+  const attempt = sbState.placed.map(p => p.char).join('');
+  const fb = document.getElementById('sb-feedback');
+  sbState.answered = true;
+  if (attempt === target) {
+    sbState.correct++;
+    fb.textContent = '✓ Correct! ' + sbNormaliseTarget(sbState.currentWord);
+    fb.className = 'sb-feedback correct'; fb.style.display = 'block';
+    // G4 XP: base 8 (no hint) or 4 (with hint), +3 bonus for ≥12-char targets without hint
+    let xp = sbState.hintUsed ? 4 : 8;
+    if (target.length >= 12 && !sbState.hintUsed) xp += 3;
+    awardVocabXP(xp, 'Spelling Bee');
+  } else {
+    sbState.wrong++;
+    fb.textContent = '✗ Wrong — correct was: ' + sbNormaliseTarget(sbState.currentWord);
+    fb.className = 'sb-feedback wrong'; fb.style.display = 'block';
+  }
+  document.getElementById('sb-correct').textContent = sbState.correct;
+  document.getElementById('sb-input-actions').style.display = 'none';
+  document.getElementById('sb-continue-actions').style.display = '';
+  document.getElementById('sb-letters').style.display = 'none';
+  renderSpellingBee();
+}
+
+function spellingBeeContinue() {
+  sbState.idx++;
+  showSpellingBeeWord();
+}
+
+function finishSpellingBee() {
+  const correct = sbState.correct, total = sbState.deck.length;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+  // Session bonus: +10 if ≥80%, +5 if ≥60%
+  let bonus = 0;
+  if (pct >= 80) bonus = 10;
+  else if (pct >= 60) bonus = 5;
+  if (bonus) awardVocabXP(bonus, 'Spelling Bee mastery');
+  setTimeout(() => {
+    alert('Spelling Bee complete!\n\nCorrect: ' + correct + '/' + total + ' (' + pct + '%)' + (bonus ? '\nMastery bonus: +' + bonus + ' XP' : ''));
+    endSpellingBee();
+  }, 200);
+}
+
+function endSpellingBee() {
+  document.body.classList.remove('playing');
+  showHomeScreen();
+}
+
+// =========================================================
+// ========== WORD HUNT (G4 — B1 themes, 8 rounds) =========
+// =========================================================
+// G4 matches against BOTH the English word (w) and the definition (d) — leverages B1 depth.
+function _whMatchG4(w, kws) {
+  const base = (w.w || '').toLowerCase().replace(/^(to|a|an|the)\s+/, '').trim();
+  const def = (w.d || '').toLowerCase();
+  if (!base) return false;
+  const tokens = base.split(/[\s\-]+/);
+  for (const kw of kws) {
+    if (kw.includes(' ')) {
+      if (base.includes(kw) || def.includes(kw)) return true;
+    } else {
+      if (base === kw) return true;
+      if (tokens.includes(kw)) return true;
+      // Match whole-word in definition
+      const re = new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
+      if (re.test(def)) return true;
+    }
+  }
+  return false;
+}
+
+const WH_CATEGORIES = [
+  { id:'govt', name:'Government & Politics', kws:['government','parliament','minister','president','vote','election','law','policy','leader','party','citizen','democracy','tax','taxes','independent','free state','majority','member','leading','put down','revolt','rebellion','protest'] },
+  { id:'food', name:'Food & Farming', kws:['food','farm','farmer','farming','crop','crops','grain','cattle','fungus','harvest','famine','starve','wheat','rice','bread','meat','vegetable','cheese','drought','pesticide','livestock','agriculture','fruit','fish','meal'] },
+  { id:'school', name:'School & Education', kws:['school','primary school','teacher','pupil','pupils','student','lesson','classroom','homework','exam','subject','education','grade','improve','study','learn','university','grammar','fluent','knowledge','lecture','degree'] },
+  { id:'family', name:'Family & People', kws:['family','mother','father','parent','parents','sister','brother','child','children','relative','cousin','grandparent','husband','wife','partner','foreigner','neighbour','neighbor','friend','person','individual','community'] },
+  { id:'work', name:'Work & Careers', kws:['work','job','career','office','employee','employer','boss','company','business','salary','wage','profession','worker','industry','intention','admire','improve','founded','found','leading','leader'] },
+  { id:'travel', name:'Travel & Geography', kws:['travel','trip','journey','hiking','tourist','holiday','abroad','country','city','region','mountain','river','sea','coast','border','foreign','foreigner','passport','airport','station','hotel','adventure'] },
+  { id:'sport_health', name:'Sport & Health', kws:['sport','sports','match','team','player','fitness','exercise','health','healthy','unconscious','injury','hospital','doctor','medicine','hiking','cheer','fit','muscle','training','wellness'] },
+  { id:'env', name:'Environment & Nature', kws:['environment','nature','climate','weather','thunder','storm','pollution','recycle','plant','forest','tree','wildlife','species','drought','famine','sustainable','green','ecology','conservation','wildlife'] },
+  { id:'arts', name:'Arts & Entertainment', kws:['art','music','song','film','movie','book','novel','story','stage','theatre','theater','actor','artist','musician','painting','culture','performance','literature','nonsense','cheer'] },
+  { id:'tech', name:'Technology & Media', kws:['technology','computer','phone','internet','website','media','news','app','software','digital','online','device','screen','smartphone','message','programme','program','broadcast'] },
+  { id:'crime', name:'Crime & Justice', kws:['crime','criminal','police','law','court','judge','prison','arrest','steal','fight','violence','incident','conflict','shake hands','interfere','illegal','offence','punish','suspect'] },
+  { id:'feelings', name:'Feelings & Character', kws:['feel','feeling','emotion','happy','sad','angry','afraid','terrified','aware','admire','proper','proud','nervous','worried','intention','be terrified','terrified','mood','character','calm'] }
+];
+
+let whState = { round: 0, totalRounds: 8, score: 0, target: null, tiles: [], picked: new Set(), correctSet: new Set(), answered: false, usedCats: new Set() };
+
+function startWordHunt() {
+  const pool = collectVocabFromSelectedUnits();
+  if (pool.length < 15) {
+    alert('Too few words — pick more units (need at least 15 for a good hunt).');
+    return;
+  }
+  whState.pool = pool;
+  whState.round = 0; whState.score = 0; whState.totalRounds = 8; whState.usedCats = new Set();
+  document.body.classList.add('playing');
+  showScreen('word-hunt-screen');
+  wordHuntNextRound();
+}
+
+function wordHuntNextRound() {
+  if (whState.round >= whState.totalRounds) { finishWordHunt(); return; }
+  // Prefer unused categories; fall back to all if exhausted
+  let candidates = WH_CATEGORIES.filter(c => !whState.usedCats.has(c.id));
+  if (candidates.length === 0) candidates = [...WH_CATEGORIES];
+  shuffle(candidates);
+  let target = null, matched = [];
+  for (const cat of candidates) {
+    const hits = whState.pool.filter(w => _whMatchG4(w, cat.kws));
+    if (hits.length >= 3) { target = cat; matched = hits; break; }
+  }
+  if (!target) { finishWordHunt(); return; }
+  whState.usedCats.add(target.id);
+  whState.target = target;
+  whState.round++;
+  whState.answered = false;
+  whState.picked = new Set();
+  shuffle(matched);
+  const numCorrect = Math.min(4, matched.length);
+  const correctPicks = matched.slice(0, numCorrect).map(w => w.w);
+  const nonMatching = whState.pool.filter(w => !_whMatchG4(w, target.kws));
+  shuffle(nonMatching);
+  const fillers = nonMatching.slice(0, 9 - numCorrect).map(w => w.w);
+  const tiles = [...correctPicks, ...fillers];
+  shuffle(tiles);
+  whState.tiles = tiles;
+  whState.correctSet = new Set(correctPicks);
+  renderWordHunt();
+}
+
+function renderWordHunt() {
+  document.getElementById('wh-round').textContent = whState.round + '/' + whState.totalRounds;
+  document.getElementById('wh-score').textContent = whState.score;
+  document.getElementById('wh-prompt-text').innerHTML = 'Which are <span class="wh-prompt-target">' + escapeHtml(whState.target.name) + '</span>?';
+  const grid = document.getElementById('wh-grid');
+  grid.innerHTML = '';
+  whState.tiles.forEach(word => {
+    const el = document.createElement('div');
+    el.className = 'wh-tile';
+    el.textContent = word;
+    el.dataset.word = word;
+    el.onclick = () => wordHuntTap(el);
+    grid.appendChild(el);
+  });
+  const fb = document.getElementById('wh-feedback');
+  fb.className = 'wh-feedback'; fb.textContent = '';
+  document.getElementById('wh-next-btn').style.display = 'none';
+}
+
+function wordHuntTap(el) {
+  if (whState.answered) return;
+  const word = el.dataset.word;
+  if (whState.picked.has(word)) return;
+  whState.picked.add(word);
+  if (whState.correctSet.has(word)) {
+    el.classList.add('correct');
+    whState.score += 1;
+    document.getElementById('wh-score').textContent = whState.score;
+    const allFound = [...whState.correctSet].every(w => whState.picked.has(w));
+    if (allFound) wordHuntFinishRound(true);
+  } else {
+    el.classList.add('wrong');
+    whState.score = Math.max(0, whState.score - 1);
+    document.getElementById('wh-score').textContent = whState.score;
+    wordHuntFinishRound(false);
+  }
+}
+
+function wordHuntFinishRound(perfect) {
+  whState.answered = true;
+  document.querySelectorAll('.wh-tile').forEach(el => {
+    const w = el.dataset.word;
+    if (whState.correctSet.has(w) && !whState.picked.has(w)) el.classList.add('missed');
+    el.style.pointerEvents = 'none';
+  });
+  const fb = document.getElementById('wh-feedback');
+  if (perfect) {
+    fb.textContent = '🌟 Perfect! All found!';
+    fb.className = 'wh-feedback show correct';
+    awardVocabXP(6, 'Word Hunt');
+  } else {
+    fb.textContent = '❌ Wrong tap — moving on!';
+    fb.className = 'wh-feedback show wrong';
+  }
+  document.getElementById('wh-next-btn').style.display = '';
+}
+
+function wordHuntNext() {
+  if (whState.round >= whState.totalRounds) { finishWordHunt(); return; }
+  wordHuntNextRound();
+}
+
+function finishWordHunt() {
+  // Streak bonus: +10 XP if ≥6/8 rounds net-positive
+  let bonus = 0;
+  if (whState.score >= 6) bonus = 10;
+  else if (whState.score >= 4) bonus = 5;
+  if (bonus) awardVocabXP(bonus, 'Word Hunt streak');
+  setTimeout(() => {
+    alert('Word Hunt complete!\n\nScore: ' + whState.score + '/' + whState.totalRounds + (bonus ? '\nStreak bonus: +' + bonus + ' XP' : ''));
+    endWordHunt();
+  }, 200);
+}
+
+function endWordHunt() {
+  document.body.classList.remove('playing');
+  showHomeScreen();
 }
 
 // ===== MULTIPLE CHOICE =====
