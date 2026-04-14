@@ -2169,6 +2169,10 @@ body.playing .header-container { display: none; }
         <div><span class="mm-stat-label">Moves:</span><span id="mm-moves">0</span></div>
       </div>
     </div>
+    <div class="wh-prompt-card" id="mm-title-card" style="display:none;">
+      <div class="wh-prompt-label" id="mm-title-label">Topic</div>
+      <div class="wh-prompt-text" id="mm-title-text"></div>
+    </div>
     <div id="mm-grid" class="mm-grid"></div>
     <div id="mm-done" class="mm-done" style="display:none;">
       <h2 id="mm-done-title">&#127881; Perfect!</h2>
@@ -2733,6 +2737,584 @@ const vocabData = {
 {w:"take up",g:"anfangen",d:"To start doing a new activity, hobby, or sport",s:"After watching the tennis match on TV, she decided to _____ the sport herself.",a:[],mc:["give up","pick up","keep up"],col:[{type:"odd",prompt:"Which does NOT go with TAKE UP?",options:["sport","hobby","tennis","volcanic"],answer:"volcanic"},{type:"gap",prompt:"She decided to _____ tennis.",options:["take up","give up","pick up","keep up"],answer:"take up"}]},
 {w:"attend",g:"an etw teilnehmen; etw besuchen",d:"To go to an event, meeting, or institution",s:"Over 500 students _____ the school concert last Friday.",cf:"attended",a:["attend","attended"],mc:["participate","arrive","visit"],col:[{type:"odd",prompt:"Which does NOT go with ATTEND?",options:["school","event","meeting","crunchy"],answer:"crunchy"},{type:"gap",prompt:"Over 500 students _____ the concert.",options:["attended","intended","pretended","extended"],answer:"attended"}]},
 ],
+};
+
+const VOCAB_TASKS = {
+  "Unit 1": {
+    mm: [
+      { t:{en:"Irish Famine", de:"Irische Hungersnot"}, pairs: [
+        ["famine","Hungersnot"],
+        ["starve","verhungern"],
+        ["crop","Ernte"],
+        ["grain","Getreide"],
+        ["fungus","Pilz"],
+        ["cattle","Rinder; Vieh"],
+        ["landlord","Grundbesitzer; Vermieter"]
+      ]},
+      { t:{en:"Politics & Power", de:"Politik & Macht"}, pairs: [
+        ["government","Regierung"],
+        ["majority","Mehrheit"],
+        ["free state","Freistaat"],
+        ["found","gründen"],
+        ["put down","niederschlagen"],
+        ["interfere","sich einmischen; in Konflikt geraten"],
+        ["tax","Steuer"],
+        ["member","Mitglied"]
+      ]},
+      { t:{en:"Describing People", de:"Menschen beschreiben"}, pairs: [
+        ["fluent","fließend"],
+        ["independent","unabhängig"],
+        ["leading","führend"],
+        ["Catholic","katholisch, Katholik/in"],
+        ["foreigner","Ausländer/-in"],
+        ["proper","richtig, angemessen"],
+        ["unconscious","bewusstlos; unbewusst"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find famine words", de:"Finde Hunger-Wörter"},
+        correct:["famine","starve","crop","grain","fungus","cattle"],
+        distractors:["government","tax","landlord"] },
+      { t:{en:"Find political power words", de:"Finde Macht-Wörter"},
+        correct:["government","majority","free state","landlord","tax"],
+        distractors:["cheer","thunder","hiking"] },
+      { t:{en:"Find feelings & reactions", de:"Finde Gefühle & Reaktionen"},
+        correct:["admire","be terrified","cheer","be aware of sth"],
+        distractors:["nonsense","proper","thunder","hiking"] }
+    ],
+    sb: ["famine","starve","fungus","landlord","government","majority","independent","foreigner","Catholic","unconscious","interfere","be terrified","primary school","shake hands","incident"]
+  },
+
+  "Unit 2": {
+    mm: [
+      { t:{en:"Crime Basics", de:"Verbrechens-Grundlagen"}, pairs: [
+        ["illegal","illegal"],
+        ["suspect","Verdächtige/r"],
+        ["criminal","Verbrecher/in"],
+        ["victim","Opfer"],
+        ["witness","Zeuge/Zeugin"],
+        ["weapon","Waffe"],
+        ["murder","Mord"],
+        ["evidence","Beweis"]
+      ]},
+      { t:{en:"Detective Work", de:"Ermittlungsarbeit"}, pairs: [
+        ["investigation","Ermittlungen; Untersuchung"],
+        ["crime scene","Tatort"],
+        ["suspicion","Verdacht"],
+        ["prove","beweisen"],
+        ["conclusion","Schlussfolgerung"],
+        ["mystery","Rätsel; Geheimnis"],
+        ["report","Bericht"],
+        ["commit","begehen"]
+      ]},
+      { t:{en:"Thinking Verbs", de:"Denk-Verben"}, pairs: [
+        ["consider","erwägen"],
+        ["mention","erwähnen"],
+        ["expect","erwarten"],
+        ["realise","erkennen; begreifen"],
+        ["keep an eye on","aufpassen auf"],
+        ["get hold of sth","etwas in die Hände bekommen"],
+        ["take over","übernehmen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find crime words", de:"Finde Verbrechens-Wörter"},
+        correct:["illegal","suspect","criminal","victim","witness","weapon","murder","evidence"],
+        distractors:["handkerchief"] },
+      { t:{en:"Find investigation words", de:"Finde Ermittlungs-Wörter"},
+        correct:["investigation","crime scene","suspicion","prove","conclusion","mystery","commit"],
+        distractors:["wastepaper bin","handkerchief"] },
+      { t:{en:"Find people nouns", de:"Finde Personen-Nomen"},
+        correct:["suspect","criminal","victim","witness","nephew","employee","office clerk","relative"],
+        distractors:["weapon"] }
+    ],
+    sb: ["suspect","criminal","witness","evidence","investigation","crime scene","suspicion","mystery","blackmail","handkerchief","wastepaper bin","excellent","conclusion","historical","realise"]
+  },
+
+  "Unit 3": {
+    mm: [
+      { t:{en:"Emergency Landing", de:"Notlandung"}, pairs: [
+        ["emergency landing","Notlandung"],
+        ["runway","Landebahn"],
+        ["takeoff","Abflug, Start"],
+        ["evacuate","evakuieren"],
+        ["rescue boat","Rettungsboot"],
+        ["wing","Flügel"],
+        ["glide down","hinuntergleiten"],
+        ["flock of birds","Vogelschwarm"]
+      ]},
+      { t:{en:"Crisis Moments", de:"Krisen-Momente"}, pairs: [
+        ["be in trouble","in Schwierigkeiten sein"],
+        ["blow up","explodieren"],
+        ["collide","zusammenstoßen, kollidieren"],
+        ["explode","explodieren"],
+        ["become desperate","verzweifeln; aussichtslos werden"],
+        ["miracle","Wunder"],
+        ["bravery","Mut, Tapferkeit"]
+      ]},
+      { t:{en:"City & People", de:"Stadt & Menschen"}, pairs: [
+        ["busy","belebt, hektisch"],
+        ["cuisine","Küche; Kulinarik"],
+        ["immigrant","Einwanderer/Einwanderin"],
+        ["native","einheimisch; ursprünglich"],
+        ["nearby","in der Nähe"],
+        ["origin","Herkunft, Ursprung"],
+        ["politics","Politik"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find aviation words", de:"Finde Flug-Wörter"},
+        correct:["emergency landing","runway","takeoff","evacuate","wing","glide down","flock of birds"],
+        distractors:["elevator (AE)","campaign"] },
+      { t:{en:"Find crisis verbs", de:"Finde Krisen-Verben"},
+        correct:["be in trouble","blow up","collide","explode","become desperate","evacuate"],
+        distractors:["charge","announcement"] },
+      { t:{en:"Find NYC & people words", de:"Finde New-York-Wörter"},
+        correct:["busy","cuisine","immigrant","native","origin","politics"],
+        distractors:["bravery","miracle","announcement"] }
+    ],
+    sb: ["emergency landing","evacuate","miracle","bravery","immigrant","cuisine","runway","takeoff","announcement","flock of birds","collide","become desperate","rescue boat","crowd-funding","campaign"]
+  },
+
+  "Unit 4": {
+    mm: [
+      { t:{en:"Jobs & Professions", de:"Berufe"}, pairs: [
+        ["accountant","Buchhalter/in"],
+        ["receptionist","Rezeptionist/in"],
+        ["mechanic","Mechaniker/in"],
+        ["nurse","Krankenpfleger/in"],
+        ["electrician","Elektriker/in"],
+        ["secretary","Sekretär/in"],
+        ["flight attendant","Flugbegleiter/in"],
+        ["employer","Arbeitgeber/in"]
+      ]},
+      { t:{en:"Work Life", de:"Arbeitsleben"}, pairs: [
+        ["career","Karriere; Berufslaufbahn"],
+        ["salary","Gehalt"],
+        ["bonus","Bonus, Zulage; Prämie"],
+        ["deadline","Frist, Abgabetermin"],
+        ["working hours","Arbeitszeit"],
+        ["(job) interview","Vorstellungsgespräch"],
+        ["unemployed","arbeitslos"],
+        ["earn","verdienen"]
+      ]},
+      { t:{en:"Job Interview Skills", de:"Vorstellungsgespräch"}, pairs: [
+        ["confidently","selbstbewusst"],
+        ["enthusiastic","enthusiastisch, begeistert"],
+        ["eye contact","Augenkontakt"],
+        ["memorise","sich einprägen"],
+        ["skills","Fähigkeiten"],
+        ["ambition","Ehrgeiz"],
+        ["casual","lässig; locker"],
+        ["advice","Ratschlag"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find professions", de:"Finde Berufe"},
+        correct:["accountant","receptionist","mechanic","nurse","electrician","secretary","flight attendant"],
+        distractors:["salary","deadline"] },
+      { t:{en:"Find work-life words", de:"Finde Arbeitsleben-Wörter"},
+        correct:["career","salary","bonus","deadline","working hours","unemployed"],
+        distractors:["casual","memorise"] },
+      { t:{en:"Find interview words", de:"Finde Interview-Wörter"},
+        correct:["confidently","enthusiastic","eye contact","memorise","skills","ambition","(job) interview"],
+        distractors:["salary","deadline"] }
+    ],
+    sb: ["accountant","receptionist","electrician","flight attendant","secretary","enthusiastic","confidently","ambition","salary","deadline","(job) interview","satisfaction","unemployed","memorise","naturally"]
+  },
+
+  "Unit 5": {
+    mm: [
+      { t:{en:"Food Adjectives", de:"Essens-Adjektive"}, pairs: [
+        ["artificial","künstlich"],
+        ["fattening","dick machend"],
+        ["filling","sättigend"],
+        ["revolting","ekelhaft, widerlich"],
+        ["harmful","schädlich"],
+        ["healthy","gesund"],
+        ["nutritious","nahrhaft"],
+        ["tasty","lecker, schmackhaft"]
+      ]},
+      { t:{en:"Diet & Health", de:"Ernährung & Gesundheit"}, pairs: [
+        ["diet","Ernährung"],
+        ["nutrition","Ernährung"],
+        ["health","Gesundheit"],
+        ["overweight","übergewichtig"],
+        ["intake","Aufnahme"],
+        ["regularly","regelmäßig"],
+        ["vegetarian","Vegetarier/in"],
+        ["contain","enthalten"]
+      ]},
+      { t:{en:"Eating Problems", de:"Essens-Probleme"}, pairs: [
+        ["eating disorder","Essstörung"],
+        ["gain","zunehmen"],
+        ["thin","dünn"],
+        ["throw up","erbrechen"],
+        ["(be) ashamed","sich schämen"],
+        ["hunger","Hunger"],
+        ["waste","verschwenden"],
+        ["trust","vertrauen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find healthy-food adjectives", de:"Finde gesunde Adjektive"},
+        correct:["healthy","nutritious","tasty","fresh","filling"],
+        distractors:["artificial","fattening","harmful","revolting"] },
+      { t:{en:"Find unhealthy-food adjectives", de:"Finde ungesunde Adjektive"},
+        correct:["artificial","fattening","harmful","revolting","overweight"],
+        distractors:["nutritious","tasty","fresh"] },
+      { t:{en:"Find eating-disorder words", de:"Finde Essstörungs-Wörter"},
+        correct:["eating disorder","thin","throw up","(be) ashamed","gain"],
+        distractors:["gym","habits","feed"] }
+    ],
+    sb: ["artificial","nutritious","revolting","fattening","vegetarian","overweight","eating disorder","nutrition","regularly","afterwards","harmful","(be) ashamed","even though","dislike","habits"]
+  },
+
+  "Unit 6": {
+    mm: [
+      { t:{en:"Goals & Achievement", de:"Ziele & Erfolg"}, pairs: [
+        ["achieve","erreichen"],
+        ["goal","Ziel"],
+        ["exceed","übertreffen"],
+        ["inspire","inspirieren"],
+        ["support","unterstützen"],
+        ["encouragement","Ermutigung; Förderung"],
+        ["learn a lesson","eine Lehre aus etw ziehen"]
+      ]},
+      { t:{en:"Giving & Community", de:"Geben & Gemeinschaft"}, pairs: [
+        ["donate","spenden"],
+        ["income","Einkommen"],
+        ["community","Gemeinschaft"],
+        ["grateful","dankbar"],
+        ["range of","eine Reihe von, zahlreiche"],
+        ["transmit","senden, übermitteln"],
+        ["drop out (of school)","(die Schule) abbrechen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find achievement words", de:"Finde Erfolgs-Wörter"},
+        correct:["achieve","goal","exceed","inspire","support","encouragement"],
+        distractors:["frustrated","donate"] },
+      { t:{en:"Find feelings & connections", de:"Finde Gefühle & Verbindungen"},
+        correct:["grateful","frustrated","relate to","inspire"],
+        distractors:["income","transmit","donate"] }
+    ],
+    sb: ["achieve","encouragement","grateful","frustrated","community","inspire","donate","exceed","transmit","income","in particular","relate to","Small wonder","learn a lesson","range of"]
+  },
+
+  "Unit 7": {
+    mm: [
+      { t:{en:"Outback Life", de:"Outback-Leben"}, pairs: [
+        ["Aborigine","Ureinwohner/in Australiens"],
+        ["(the) outback","Hinterland Australiens"],
+        ["bush trail","Buschpfad"],
+        ["walkabout","Buschwanderung"],
+        ["ancestor","Vorfahr/in; Ahne, Ahnin"],
+        ["heritage","Erbe, Tradition"],
+        ["survival skills","Überlebenstechniken, -fähigkeiten"],
+        ["track","Fährte, Spur"]
+      ]},
+      { t:{en:"Physical Actions", de:"Körperliche Aktionen"}, pairs: [
+        ["crawl","kriechen"],
+        ["drag","schleppen"],
+        ["grab","packen"],
+        ["jump-start","Starthilfe geben"],
+        ["headlight","Scheinwerfer"],
+        ["pressure","Druck"],
+        ["shade","Schatten"]
+      ]},
+      { t:{en:"Flying Doctor Service", de:"Fliegender Arzt-Dienst"}, pairs: [
+        ["aircraft","Flugzeug"],
+        ["ambulance","Krankenwagen"],
+        ["first aid","Erste Hilfe"],
+        ["drugs","Medikamente"],
+        ["landing","Landung"],
+        ["airline","Fluglinie"],
+        ["distance","Entfernung"],
+        ["provide","versorgen; verschaffen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find outback words", de:"Finde Outback-Wörter"},
+        correct:["Aborigine","(the) outback","bush trail","walkabout","ancestor","heritage","survival skills"],
+        distractors:["envelope","cheque"] },
+      { t:{en:"Find flying-doctor words", de:"Finde Flugarzt-Wörter"},
+        correct:["aircraft","ambulance","first aid","drugs","landing","airline"],
+        distractors:["walkabout","reed","string"] },
+      { t:{en:"Find physical-action verbs", de:"Finde Bewegungs-Verben"},
+        correct:["crawl","drag","grab","jump-start","provide"],
+        distractors:["shade","pressure","headlight"] }
+    ],
+    sb: ["Aborigine","walkabout","ancestor","heritage","survival skills","(the) outback","ambulance","aircraft","first aid","gorgeous","envelope","excess weight","detailed","jump-start","bush trail"]
+  },
+
+  "Unit 8": {
+    mm: [
+      { t:{en:"Monastery & Books", de:"Kloster & Bücher"}, pairs: [
+        ["library","Bibliothek"],
+        ["librarian","Bibliothekar/in"],
+        ["monastery","Kloster"],
+        ["monk","Mönch"],
+        ["precious","kostbar"],
+        ["preserve","erhalten; schützen"],
+        ["rare","selten"],
+        ["sheet","Blatt"]
+      ]},
+      { t:{en:"Justice & Crime", de:"Justiz & Verbrechen"}, pairs: [
+        ["judge","Richter/in"],
+        ["execute","hinrichten"],
+        ["sentence to death","zu Tode verurteilen"],
+        ["rob","ausrauben"],
+        ["burn to the ground","niederbrennen"],
+        ["furious","wütend, aufgebracht"],
+        ["auction","Auktion, Versteigerung"],
+        ["black market","Schwarzmarkt"]
+      ]},
+      { t:{en:"Addiction & State", de:"Sucht & Zustand"}, pairs: [
+        ["addict","Abhängige/r, Süchtige/r"],
+        ["addiction","Sucht"],
+        ["go crazy","verrückt werden, durchdrehen"],
+        ["miss out on sth","etw verpassen"],
+        ["pale","blass"],
+        ["confuse sb","jdn verwirren"],
+        ["whisper","flüstern"],
+        ["turn up","auftauchen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find book/monastery words", de:"Finde Bücher-/Kloster-Wörter"},
+        correct:["library","librarian","monastery","monk","precious","preserve","sheet"],
+        distractors:["execute","auction"] },
+      { t:{en:"Find justice words", de:"Finde Justiz-Wörter"},
+        correct:["judge","execute","sentence to death","rob","command","furious"],
+        distractors:["librarian","precious"] },
+      { t:{en:"Find addiction words", de:"Finde Sucht-Wörter"},
+        correct:["addict","addiction","go crazy","miss out on sth","pale"],
+        distractors:["sheet","whisper","kitschy"] }
+    ],
+    sb: ["librarian","monastery","precious","preserve","execute","sentence to death","addiction","furious","auction","black market","fascination","kitschy","whisper","confuse sb","command"]
+  },
+
+  "Unit 9": {
+    mm: [
+      { t:{en:"Wedding Day", de:"Hochzeitstag"}, pairs: [
+        ["wedding dress","Brautkleid"],
+        ["wedding suit","Hochzeitsanzug"],
+        ["bride","Braut"],
+        ["bridegroom","Bräutigam"],
+        ["bridesmaid","Brautjungfer"],
+        ["ceremony","Zeremonie"],
+        ["fashionable","in Mode, modisch"]
+      ]},
+      { t:{en:"Hand Gestures", de:"Handgesten"}, pairs: [
+        ["gesture","Geste"],
+        ["greet","begrüßen"],
+        ["index finger","Zeigefinger"],
+        ["thumb","Daumen"],
+        ["palm","Handfläche"],
+        ["nod the head","mit dem Kopf nicken"],
+        ["victory","Sieg"],
+        ["insult","beleidigen"]
+      ]},
+      { t:{en:"Feelings & Reactions", de:"Gefühle & Reaktionen"}, pairs: [
+        ["embarrassed","verlegen"],
+        ["confused","verwirrt"],
+        ["rebellious","rebellisch"],
+        ["giggle","kichern"],
+        ["sigh","seufzen"],
+        ["hastily","hastig"],
+        ["ignore","ignorieren"],
+        ["scare off","verscheuchen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find wedding words", de:"Finde Hochzeits-Wörter"},
+        correct:["wedding dress","wedding suit","bride","bridegroom","bridesmaid","ceremony"],
+        distractors:["funeral","devil","goth"] },
+      { t:{en:"Find gesture/hand words", de:"Finde Gesten-Wörter"},
+        correct:["gesture","greet","index finger","thumb","palm","nod the head","victory"],
+        distractors:["sleeve","needle"] },
+      { t:{en:"Find feelings", de:"Finde Gefühle"},
+        correct:["embarrassed","confused","rebellious","giggle","sigh"],
+        distractors:["permanent","pierced","religious"] }
+    ],
+    sb: ["bridegroom","bridesmaid","ceremony","fashionable","rebellious","religious","embarrassed","confused","hastily","index finger","nod the head","gesture","possibility","pierced","decent-looking"]
+  },
+
+  "Unit 10": {
+    mm: [
+      { t:{en:"Fair Trade", de:"Fairer Handel"}, pairs: [
+        ["Fair Trade","eine Organisation, die sich für fairen Handel einsetzt"],
+        ["farmer","Landwirt/in"],
+        ["make a living","den Lebensunterhalt verdienen"],
+        ["pay rise","Gehaltserhöhung"],
+        ["pesticide","Pestizid; Insektenbekämpfungsmittel"],
+        ["agreement","Vereinbarung"],
+        ["increase","steigen, erhöhen"],
+        ["select","auswählen"]
+      ]},
+      { t:{en:"Racism & Inequality", de:"Rassismus & Ungleichheit"}, pairs: [
+        ["racism","Rassismus"],
+        ["racist","rassistisch"],
+        ["slavery","Sklaverei"],
+        ["ignorance","Ignoranz"],
+        ["fairness","Gerechtigkeit; Fairness"],
+        ["recognition","Anerkennung, Bestätigung"],
+        ["defeat","besiegen; überwältigen"],
+        ["overcome","bezwingen; überwinden"]
+      ]},
+      { t:{en:"Strong Emotions", de:"Starke Gefühle"}, pairs: [
+        ["angry","wütend"],
+        ["annoy","(ver-)ärgern"],
+        ["helpless","hilflos"],
+        ["hurt","verletzen"],
+        ["misunderstood","missverstanden"],
+        ["proud","stolz"],
+        ["shocked","schockiert"],
+        ["surprised","überrascht"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find Fair Trade words", de:"Finde Fairhandels-Wörter"},
+        correct:["Fair Trade","farmer","pay rise","pesticide","agreement","make a living","oil"],
+        distractors:["racism","slavery"] },
+      { t:{en:"Find racism words", de:"Finde Rassismus-Wörter"},
+        correct:["racism","racist","slavery","ignorance","fairness","hurtful"],
+        distractors:["pesticide","farmer"] },
+      { t:{en:"Find strong emotions", de:"Finde starke Gefühle"},
+        correct:["angry","helpless","misunderstood","proud","shocked","surprised"],
+        distractors:["select","claim","increase"] }
+    ],
+    sb: ["pesticide","slavery","ignorance","recognition","racism","racist","fairness","misunderstood","brother-in-law","son-in-law","human being","hurtful","pollution","agreement","introduction"]
+  },
+
+  "Unit 11": {
+    mm: [
+      { t:{en:"Book Types", de:"Buch-Arten"}, pairs: [
+        ["screenplay","Drehbuch"],
+        ["play","Theaterstück"],
+        ["poetry","Poesie, Lyrik"],
+        ["comic","Comic"],
+        ["novel","Roman"],
+        ["biography","Biografie"],
+        ["short story","Kurzgeschichte"],
+        ["anthology","Anthologie, Sammlung"]
+      ]},
+      { t:{en:"Book Features", de:"Buch-Merkmale"}, pairs: [
+        ["book review","Buchrezension"],
+        ["blurb","Werbetext auf Buchumschlag; Klappentext"],
+        ["dictionary","Wörterbuch"],
+        ["historical novel","historischer Roman"],
+        ["trilogy","Trilogie"],
+        ["reference","Bezug; Hinweis"],
+        ["disappointment","Enttäuschung"],
+        ["prefer","bevorzugen"]
+      ]},
+      { t:{en:"Scottish Adventure", de:"Schottisches Abenteuer"}, pairs: [
+        ["kilt","Kilt, Schottenrock"],
+        ["goggles","Schwimmbrille; Schutzbrille"],
+        ["fence","Zaun"],
+        ["wee","klein, winzig"],
+        ["spot of bother","Problem; Ärger"],
+        ["sort oneself out","sich ordnen; zu sich (selbst) finden"],
+        ["answer the door","an die Tür gehen, jdn hereinlassen"],
+        ["clear up","aufräumen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find book types", de:"Finde Buch-Arten"},
+        correct:["screenplay","play","poetry","comic","novel","biography","short story","anthology"],
+        distractors:["blurb"] },
+      { t:{en:"Find book-related words", de:"Finde Buch-Wörter"},
+        correct:["book review","blurb","dictionary","historical novel","trilogy","reference"],
+        distractors:["fence","kilt","goggles"] },
+      { t:{en:"Find Scottish-adventure words", de:"Finde Schottland-Wörter"},
+        correct:["kilt","goggles","fence","wee","spot of bother","sort oneself out"],
+        distractors:["fairy","millionaire","innocent"] }
+    ],
+    sb: ["screenplay","anthology","biography","trilogy","historical novel","dictionary","disappointment","millionaire","innocent","reference","spot of bother","sort oneself out","answer the door","fairy","scratch"]
+  },
+
+  "Unit 12": {
+    mm: [
+      { t:{en:"Space Exploration", de:"Weltraumforschung"}, pairs: [
+        ["asteroid","Asteroid"],
+        ["astronaut","Astronaut/in"],
+        ["space shuttle","Raumfähre"],
+        ["spacecraft","Raumfahrzeug"],
+        ["orbit","Umlaufbahn"],
+        ["atmosphere","Atmosphäre"],
+        ["crew","Mannschaft; Besatzung"],
+        ["commander","Kommandant/in"]
+      ]},
+      { t:{en:"Space Views", de:"Weltraum-Blicke"}, pairs: [
+        ["sunrise","Sonnenaufgang"],
+        ["sunset","Sonnenuntergang"],
+        ["gravity","Schwerkraft"],
+        ["surface","Oberfläche"],
+        ["biosphere","Lebensraum, Biosphäre"],
+        ["uninhabitable","unbewohnbar"],
+        ["mankind","Menschheit"],
+        ["space travel","Raumfahrt"]
+      ]},
+      { t:{en:"Missions & Business", de:"Missionen & Geschäft"}, pairs: [
+        ["explosion","Explosion"],
+        ["warning","Warnung"],
+        ["engineering","Maschinenbau; Ingenieurwesen"],
+        ["commercial","kommerziell"],
+        ["privately owned","im Privatbesitz befindlich"],
+        ["multibillion","Multimilliarden-"],
+        ["demand","verlangen"],
+        ["genetic engineering","Gentechnik; Genmanipulation"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find space objects", de:"Finde Weltraum-Objekte"},
+        correct:["asteroid","astronaut","space shuttle","spacecraft","orbit","atmosphere","crew"],
+        distractors:["advert","masterpiece"] },
+      { t:{en:"Find space-view words", de:"Finde Weltraum-Blick-Wörter"},
+        correct:["sunrise","sunset","gravity","surface","biosphere","uninhabitable","mankind"],
+        distractors:["demand","disturb"] },
+      { t:{en:"Find feelings & reactions", de:"Finde Gefühle & Reaktionen"},
+        correct:["depressed","disgusting","tiring","disturb"],
+        distractors:["celebrate","reply","warning","masterpiece"] }
+    ],
+    sb: ["astronaut","asteroid","space shuttle","spacecraft","atmosphere","uninhabitable","genetic engineering","biosphere","gravity","engineering","commander","multibillion","masterpiece","commercial","disgusting"]
+  },
+
+  "Unit 13": {
+    mm: [
+      { t:{en:"Leisure Activities", de:"Freizeit-Aktivitäten"}, pairs: [
+        ["scuba-diving","(Sport-)Tauchen"],
+        ["leisure centre","Freizeitzentrum"],
+        ["tournament","Turnier"],
+        ["chill out","relaxen, sich entspannen"],
+        ["highlight","Höhepunkt"],
+        ["kill time","sich die Zeit vertreiben"],
+        ["take up","anfangen"],
+        ["attend","an etw teilnehmen; etw besuchen"]
+      ]},
+      { t:{en:"Sport & Discipline", de:"Sport & Disziplin"}, pairs: [
+        ["apply (for)","sich bewerben (für)"],
+        ["discipline","Disziplin"],
+        ["tough","hart; schwierig"],
+        ["honestly","ehrlich"],
+        ["water-proof","wasserdicht"],
+        ["catch up on","aufholen; (Versäumtes) nachholen"],
+        ["get involved with","sich auf etw einlassen; mitmischen (bei)"],
+        ["help out","(aus-)helfen"]
+      ]}
+    ],
+    wh: [
+      { t:{en:"Find leisure activities", de:"Finde Freizeit-Aktivitäten"},
+        correct:["scuba-diving","leisure centre","tournament","chill out","kill time","take up"],
+        distractors:["beggar","coal","legend"] },
+      { t:{en:"Find sport & effort words", de:"Finde Sport-Wörter"},
+        correct:["discipline","tough","honestly","apply (for)","attend","highlight"],
+        distractors:["edition","ripe","legend"] }
+    ],
+    sb: ["scuba-diving","tournament","discipline","leisure centre","occasionally","water-proof","autograph","catch up on","get involved with","honestly","apply (for)","legend","highlight","ripe","beggar"]
+  }
 };
 
 // ===== AVATAR SYSTEM =====
@@ -5279,33 +5861,66 @@ function awardVocabXP(n, label) {
 // =========================================================
 let mmState = { pairs: [], cards: [], first: null, second: null, moves: 0, matched: 0, startTime: 0, busy: false, poolSize: 12 };
 
+function collectVocabTasks(kind) {
+  const out = [];
+  (state.selectedSources || []).forEach(src => {
+    if (typeof VOCAB_TASKS !== 'undefined' && VOCAB_TASKS[src] && VOCAB_TASKS[src][kind]) {
+      VOCAB_TASKS[src][kind].forEach(task => out.push(Object.assign({}, task, { source: src })));
+    }
+  });
+  return out;
+}
+
+function findVocabWord(src, enText) {
+  const arr = vocabData[src];
+  if (!arr) return null;
+  return arr.find(w => w.w === enText) || null;
+}
+
 function startMemoryMatch() {
-  const pool = collectVocabFromSelectedUnits();
-  if (pool.length < 8) {
-    alert('Too few words — pick more units (need at least 8).');
+  const tasks = collectVocabTasks('mm');
+  if (tasks.length === 0) {
+    alert('No Memory Match tasks for selected units.');
     return;
   }
-  mmState.poolSize = Math.min(12, pool.length);
-  mmState._pool = pool;
+  shuffle(tasks);
+  mmState._queue = tasks;
+  mmState._queueIdx = 0;
   document.body.classList.add('playing');
   showScreen('memory-match-screen');
   startMemoryMatchRound();
 }
 
 function startMemoryMatchRound() {
-  const pool = mmState._pool || collectVocabFromSelectedUnits();
-  shuffle(pool);
-  const picks = pool.slice(0, mmState.poolSize);
+  let q = mmState._queue;
+  if (!q || !q.length) {
+    q = collectVocabTasks('mm');
+    if (!q.length) { endMemoryMatch(); return; }
+    shuffle(q); mmState._queue = q; mmState._queueIdx = 0;
+  }
+  const task = q[mmState._queueIdx % q.length];
+  mmState._queueIdx++;
+  const pairs = [...task.pairs];
+  shuffle(pairs);
+  const picks = pairs.slice(0, Math.min(8, pairs.length));
   const cards = [];
-  picks.forEach((w, i) => {
-    cards.push({ pairId: i, kind: 'en', text: w.w, word: w });
-    cards.push({ pairId: i, kind: 'de', text: (w.g || '').split(',')[0].split(';')[0].trim(), word: w });
+  picks.forEach((p, i) => {
+    cards.push({ pairId: i, kind: 'en', text: p[0] });
+    cards.push({ pairId: i, kind: 'de', text: p[1] });
   });
   shuffle(cards);
   mmState.pairs = picks;
   mmState.cards = cards;
   mmState.first = null; mmState.second = null; mmState.moves = 0; mmState.matched = 0;
   mmState.startTime = Date.now(); mmState.busy = false;
+  const titleCard = document.getElementById('mm-title-card');
+  const titleText = document.getElementById('mm-title-text');
+  const titleLabel = document.getElementById('mm-title-label');
+  if (titleCard && titleText) {
+    titleLabel.textContent = 'Topic';
+    titleText.textContent = task.t.en + ' — ' + task.source;
+    titleCard.style.display = '';
+  }
   renderMemoryMatch();
   document.getElementById('mm-done').style.display = 'none';
   document.getElementById('mm-grid').style.display = '';
@@ -5417,16 +6032,23 @@ function sbNormaliseTarget(w) {
 }
 
 function startSpellingBee() {
-  const pool = collectVocabFromSelectedUnits().filter(w => {
-    const t = sbNormaliseTarget(w);
-    // Must have letters, 3-30 chars, and no apostrophe contractions that are hard to build
-    if (t.length < 3 || t.length > 30) return false;
-    if (!/[a-zA-Z]/.test(t)) return false;
-    return true;
+  const seen = new Set();
+  const pool = [];
+  (state.selectedSources || []).forEach(src => {
+    if (!(typeof VOCAB_TASKS !== 'undefined' && VOCAB_TASKS[src] && VOCAB_TASKS[src].sb)) return;
+    VOCAB_TASKS[src].sb.forEach(en => {
+      const key = src + '::' + en;
+      if (seen.has(key)) return;
+      seen.add(key);
+      const w = findVocabWord(src, en);
+      if (!w) return;
+      const t = sbNormaliseTarget(w);
+      if (t.length >= 3 && t.length <= 30 && /[a-zA-Z]/.test(t)) pool.push(w);
+    });
   });
-  if (pool.length < 6) { alert('Too few suitable words — pick more units.'); return; }
+  if (pool.length < 5) { alert('Too few suitable words — pick more units.'); return; }
   shuffle(pool);
-  sbState.deck = pool.slice(0, Math.min(18, pool.length));
+  sbState.deck = pool.slice(0, Math.min(15, pool.length));
   sbState.idx = 0; sbState.correct = 0; sbState.wrong = 0;
   document.body.classList.add('playing');
   showScreen('spelling-bee-screen');
@@ -5621,53 +6243,21 @@ function endSpellingBee() {
 }
 
 // =========================================================
-// ========== WORD HUNT (G4 — B1 themes, 8 rounds) =========
+// ========== WORD HUNT (curated per-unit tasks) ===========
 // =========================================================
-// G4 matches against BOTH the English word (w) and the definition (d) — leverages B1 depth.
-function _whMatchG4(w, kws) {
-  const base = (w.w || '').toLowerCase().replace(/^(to|a|an|the)\s+/, '').trim();
-  const def = (w.d || '').toLowerCase();
-  if (!base) return false;
-  const tokens = base.split(/[\s\-]+/);
-  for (const kw of kws) {
-    if (kw.includes(' ')) {
-      if (base.includes(kw) || def.includes(kw)) return true;
-    } else {
-      if (base === kw) return true;
-      if (tokens.includes(kw)) return true;
-      // Match whole-word in definition
-      const re = new RegExp('\\b' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i');
-      if (re.test(def)) return true;
-    }
-  }
-  return false;
-}
-
-const WH_CATEGORIES = [
-  { id:'govt', name:'Government & Politics', kws:['government','parliament','minister','president','vote','election','law','policy','leader','party','citizen','democracy','tax','taxes','independent','free state','majority','member','leading','put down','revolt','rebellion','protest'] },
-  { id:'food', name:'Food & Farming', kws:['food','farm','farmer','farming','crop','crops','grain','cattle','fungus','harvest','famine','starve','wheat','rice','bread','meat','vegetable','cheese','drought','pesticide','livestock','agriculture','fruit','fish','meal'] },
-  { id:'school', name:'School & Education', kws:['school','primary school','teacher','pupil','pupils','student','lesson','classroom','homework','exam','subject','education','grade','improve','study','learn','university','grammar','fluent','knowledge','lecture','degree'] },
-  { id:'family', name:'Family & People', kws:['family','mother','father','parent','parents','sister','brother','child','children','relative','cousin','grandparent','husband','wife','partner','foreigner','neighbour','neighbor','friend','person','individual','community'] },
-  { id:'work', name:'Work & Careers', kws:['work','job','career','office','employee','employer','boss','company','business','salary','wage','profession','worker','industry','intention','admire','improve','founded','found','leading','leader'] },
-  { id:'travel', name:'Travel & Geography', kws:['travel','trip','journey','hiking','tourist','holiday','abroad','country','city','region','mountain','river','sea','coast','border','foreign','foreigner','passport','airport','station','hotel','adventure'] },
-  { id:'sport_health', name:'Sport & Health', kws:['sport','sports','match','team','player','fitness','exercise','health','healthy','unconscious','injury','hospital','doctor','medicine','hiking','cheer','fit','muscle','training','wellness'] },
-  { id:'env', name:'Environment & Nature', kws:['environment','nature','climate','weather','thunder','storm','pollution','recycle','plant','forest','tree','wildlife','species','drought','famine','sustainable','green','ecology','conservation','wildlife'] },
-  { id:'arts', name:'Arts & Entertainment', kws:['art','music','song','film','movie','book','novel','story','stage','theatre','theater','actor','artist','musician','painting','culture','performance','literature','nonsense','cheer'] },
-  { id:'tech', name:'Technology & Media', kws:['technology','computer','phone','internet','website','media','news','app','software','digital','online','device','screen','smartphone','message','programme','program','broadcast'] },
-  { id:'crime', name:'Crime & Justice', kws:['crime','criminal','police','law','court','judge','prison','arrest','steal','fight','violence','incident','conflict','shake hands','interfere','illegal','offence','punish','suspect'] },
-  { id:'feelings', name:'Feelings & Character', kws:['feel','feeling','emotion','happy','sad','angry','afraid','terrified','aware','admire','proper','proud','nervous','worried','intention','be terrified','terrified','mood','character','calm'] }
-];
-
-let whState = { round: 0, totalRounds: 8, score: 0, target: null, tiles: [], picked: new Set(), correctSet: new Set(), answered: false, usedCats: new Set() };
+let whState = { round: 0, totalRounds: 7, score: 0, target: null, tiles: [], picked: new Set(), correctSet: new Set(), answered: false };
 
 function startWordHunt() {
-  const pool = collectVocabFromSelectedUnits();
-  if (pool.length < 15) {
-    alert('Too few words — pick more units (need at least 15 for a good hunt).');
+  const tasks = collectVocabTasks('wh');
+  if (tasks.length === 0) {
+    alert('No Word Hunt tasks for selected units.');
     return;
   }
-  whState.pool = pool;
-  whState.round = 0; whState.score = 0; whState.totalRounds = 8; whState.usedCats = new Set();
+  shuffle(tasks);
+  whState._queue = tasks;
+  whState._queueIdx = 0;
+  whState.round = 0; whState.score = 0;
+  whState.totalRounds = Math.min(tasks.length, 8);
   document.body.classList.add('playing');
   showScreen('word-hunt-screen');
   wordHuntNextRound();
@@ -5675,28 +6265,21 @@ function startWordHunt() {
 
 function wordHuntNextRound() {
   if (whState.round >= whState.totalRounds) { finishWordHunt(); return; }
-  // Prefer unused categories; fall back to all if exhausted
-  let candidates = WH_CATEGORIES.filter(c => !whState.usedCats.has(c.id));
-  if (candidates.length === 0) candidates = [...WH_CATEGORIES];
-  shuffle(candidates);
-  let target = null, matched = [];
-  for (const cat of candidates) {
-    const hits = whState.pool.filter(w => _whMatchG4(w, cat.kws));
-    if (hits.length >= 3) { target = cat; matched = hits; break; }
-  }
-  if (!target) { finishWordHunt(); return; }
-  whState.usedCats.add(target.id);
-  whState.target = target;
+  const task = whState._queue[whState._queueIdx % whState._queue.length];
+  whState._queueIdx++;
+  whState.target = task;
   whState.round++;
   whState.answered = false;
   whState.picked = new Set();
-  shuffle(matched);
-  const numCorrect = Math.min(4, matched.length);
-  const correctPicks = matched.slice(0, numCorrect).map(w => w.w);
-  const nonMatching = whState.pool.filter(w => !_whMatchG4(w, target.kws));
-  shuffle(nonMatching);
-  const fillers = nonMatching.slice(0, 9 - numCorrect).map(w => w.w);
-  const tiles = [...correctPicks, ...fillers];
+  const correct = [...task.correct];
+  const distractors = [...(task.distractors || [])];
+  shuffle(correct); shuffle(distractors);
+  const maxTiles = 9;
+  let cap = Math.min(correct.length, maxTiles - Math.min(distractors.length, 2));
+  cap = Math.max(cap, 3);
+  const correctPicks = correct.slice(0, Math.min(correct.length, cap));
+  const distractorPicks = distractors.slice(0, maxTiles - correctPicks.length);
+  const tiles = [...correctPicks, ...distractorPicks];
   shuffle(tiles);
   whState.tiles = tiles;
   whState.correctSet = new Set(correctPicks);
@@ -5706,7 +6289,8 @@ function wordHuntNextRound() {
 function renderWordHunt() {
   document.getElementById('wh-round').textContent = whState.round + '/' + whState.totalRounds;
   document.getElementById('wh-score').textContent = whState.score;
-  document.getElementById('wh-prompt-text').innerHTML = 'Which are <span class="wh-prompt-target">' + escapeHtml(whState.target.name) + '</span>?';
+  const catName = whState.target && whState.target.t ? whState.target.t.en : '';
+  document.getElementById('wh-prompt-text').innerHTML = 'Which are <span class="wh-prompt-target">' + escapeHtml(catName) + '</span>?';
   const grid = document.getElementById('wh-grid');
   grid.innerHTML = '';
   whState.tiles.forEach(word => {
