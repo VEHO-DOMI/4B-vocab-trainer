@@ -2772,15 +2772,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find famine words", de:"Finde Hunger-Wörter"},
-        correct:["famine","starve","crop","grain","fungus","cattle"],
-        distractors:["government","tax","landlord"] },
-      { t:{en:"Find political power words", de:"Finde Macht-Wörter"},
-        correct:["government","majority","free state","landlord","tax"],
-        distractors:["cheer","thunder","hiking"] },
-      { t:{en:"Find feelings & reactions", de:"Finde Gefühle & Reaktionen"},
-        correct:["admire","be terrified","cheer","be aware of sth"],
-        distractors:["nonsense","proper","thunder","hiking"] }
+      { t:{en:"famine & agriculture words", de:"Hunger & Landwirtschaft"},
+        correct:["famine","starve","crop","grain","fungus","cattle","landlord"],
+        distractors:["government","majority","tax","Catholic","foreigner"] },
+      { t:{en:"political-power words", de:"Wörter rund um politische Macht"},
+        correct:["government","majority","free state","found","put down","interfere","tax","member"],
+        distractors:["landlord","fluent","foreigner","unconscious"] },
+      { t:{en:"people-description words", de:"Wörter, die Menschen beschreiben"},
+        correct:["fluent","independent","leading","Catholic","foreigner","proper","unconscious"],
+        distractors:["government","cattle","grain","fungus","free state"] }
     ],
     sb: ["famine","starve","fungus","landlord","government","majority","independent","foreigner","Catholic","unconscious","interfere","be terrified","primary school","shake hands","incident"]
   },
@@ -2818,15 +2818,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find crime words", de:"Finde Verbrechens-Wörter"},
+      { t:{en:"crime-basic words", de:"Verbrechens-Grundwörter"},
         correct:["illegal","suspect","criminal","victim","witness","weapon","murder","evidence"],
-        distractors:["handkerchief"] },
-      { t:{en:"Find investigation words", de:"Finde Ermittlungs-Wörter"},
-        correct:["investigation","crime scene","suspicion","prove","conclusion","mystery","commit"],
-        distractors:["wastepaper bin","handkerchief"] },
-      { t:{en:"Find people nouns", de:"Finde Personen-Nomen"},
-        correct:["suspect","criminal","victim","witness","nephew","employee","office clerk","relative"],
-        distractors:["weapon"] }
+        distractors:["consider","mention","prove","realise"] },
+      { t:{en:"detective-work words", de:"Ermittlungs-Wörter"},
+        correct:["investigation","crime scene","suspicion","prove","conclusion","mystery","report","commit"],
+        distractors:["handkerchief","wastepaper bin","excellent","historical"] },
+      { t:{en:"thinking & noticing verbs", de:"Denk- und Wahrnehmungs-Verben"},
+        correct:["consider","mention","expect","realise","keep an eye on","get hold of sth","take over"],
+        distractors:["investigation","mystery","murder","criminal","blackmail"] }
     ],
     sb: ["suspect","criminal","witness","evidence","investigation","crime scene","suspicion","mystery","blackmail","handkerchief","wastepaper bin","excellent","conclusion","historical","realise"]
   },
@@ -2863,15 +2863,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find aviation words", de:"Finde Flug-Wörter"},
-        correct:["emergency landing","runway","takeoff","evacuate","wing","glide down","flock of birds"],
-        distractors:["elevator (AE)","campaign"] },
-      { t:{en:"Find crisis verbs", de:"Finde Krisen-Verben"},
-        correct:["be in trouble","blow up","collide","explode","become desperate","evacuate"],
-        distractors:["charge","announcement"] },
-      { t:{en:"Find NYC & people words", de:"Finde New-York-Wörter"},
-        correct:["busy","cuisine","immigrant","native","origin","politics"],
-        distractors:["bravery","miracle","announcement"] }
+      { t:{en:"aviation & landing words", de:"Flug- & Landungs-Wörter"},
+        correct:["emergency landing","runway","takeoff","evacuate","rescue boat","wing","glide down","flock of birds"],
+        distractors:["miracle","bravery","announcement","immigrant"] },
+      { t:{en:"crisis & danger words", de:"Krisen- & Gefahren-Wörter"},
+        correct:["be in trouble","blow up","collide","explode","become desperate","miracle","bravery"],
+        distractors:["cuisine","immigrant","native","politics","origin"] },
+      { t:{en:"city & people words", de:"Stadt- & Menschen-Wörter"},
+        correct:["busy","cuisine","immigrant","native","nearby","origin","politics"],
+        distractors:["explode","evacuate","runway","miracle","flock of birds"] }
     ],
     sb: ["emergency landing","evacuate","miracle","bravery","immigrant","cuisine","runway","takeoff","announcement","flock of birds","collide","become desperate","rescue boat","crowd-funding","campaign"]
   },
@@ -2910,15 +2910,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find professions", de:"Finde Berufe"},
-        correct:["accountant","receptionist","mechanic","nurse","electrician","secretary","flight attendant"],
-        distractors:["salary","deadline"] },
-      { t:{en:"Find work-life words", de:"Finde Arbeitsleben-Wörter"},
-        correct:["career","salary","bonus","deadline","working hours","unemployed"],
-        distractors:["casual","memorise"] },
-      { t:{en:"Find interview words", de:"Finde Interview-Wörter"},
-        correct:["confidently","enthusiastic","eye contact","memorise","skills","ambition","(job) interview"],
-        distractors:["salary","deadline"] }
+      { t:{en:"professions", de:"Berufe"},
+        correct:["accountant","receptionist","mechanic","nurse","electrician","secretary","flight attendant","employer"],
+        distractors:["salary","deadline","ambition","casual"] },
+      { t:{en:"work-life words", de:"Arbeitsleben-Wörter"},
+        correct:["career","salary","bonus","deadline","working hours","(job) interview","unemployed","earn"],
+        distractors:["mechanic","nurse","confidently","memorise"] },
+      { t:{en:"interview-skill words", de:"Interview-Wörter"},
+        correct:["confidently","enthusiastic","eye contact","memorise","skills","ambition","casual","advice"],
+        distractors:["salary","career","accountant","nurse"] }
     ],
     sb: ["accountant","receptionist","electrician","flight attendant","secretary","enthusiastic","confidently","ambition","salary","deadline","(job) interview","satisfaction","unemployed","memorise","naturally"]
   },
@@ -2957,15 +2957,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find healthy-food adjectives", de:"Finde gesunde Adjektive"},
-        correct:["healthy","nutritious","tasty","fresh","filling"],
-        distractors:["artificial","fattening","harmful","revolting"] },
-      { t:{en:"Find unhealthy-food adjectives", de:"Finde ungesunde Adjektive"},
-        correct:["artificial","fattening","harmful","revolting","overweight"],
-        distractors:["nutritious","tasty","fresh"] },
-      { t:{en:"Find eating-disorder words", de:"Finde Essstörungs-Wörter"},
-        correct:["eating disorder","thin","throw up","(be) ashamed","gain"],
-        distractors:["gym","habits","feed"] }
+      { t:{en:"healthy-eating words", de:"Wörter rund um gesunde Ernährung"},
+        correct:["healthy","nutritious","tasty","filling","vegetarian","regularly","diet","nutrition"],
+        distractors:["artificial","fattening","revolting","harmful"] },
+      { t:{en:"unhealthy-food words", de:"Wörter rund um ungesundes Essen"},
+        correct:["artificial","fattening","revolting","harmful","overweight","(be) ashamed"],
+        distractors:["healthy","nutritious","tasty","filling","nutrition","vegetarian"] },
+      { t:{en:"eating-disorder & feelings words", de:"Wörter rund um Essstörungen & Gefühle"},
+        correct:["eating disorder","gain","thin","throw up","(be) ashamed","hunger","waste"],
+        distractors:["nutritious","tasty","regularly","intake","diet"] }
     ],
     sb: ["artificial","nutritious","revolting","fattening","vegetarian","overweight","eating disorder","nutrition","regularly","afterwards","harmful","(be) ashamed","even though","dislike","habits"]
   },
@@ -2992,12 +2992,12 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find achievement words", de:"Finde Erfolgs-Wörter"},
-        correct:["achieve","goal","exceed","inspire","support","encouragement"],
-        distractors:["frustrated","donate"] },
-      { t:{en:"Find feelings & connections", de:"Finde Gefühle & Verbindungen"},
-        correct:["grateful","frustrated","relate to","inspire"],
-        distractors:["income","transmit","donate"] }
+      { t:{en:"achievement & goal words", de:"Ziel- & Erfolgs-Wörter"},
+        correct:["achieve","goal","exceed","inspire","support","encouragement","learn a lesson"],
+        distractors:["donate","income","community","grateful","transmit"] },
+      { t:{en:"community & feelings words", de:"Gemeinschaft & Gefühle"},
+        correct:["donate","income","community","grateful","range of","transmit","relate to","frustrated"],
+        distractors:["achieve","exceed","inspire","learn a lesson"] }
     ],
     sb: ["achieve","encouragement","grateful","frustrated","community","inspire","donate","exceed","transmit","income","in particular","relate to","Small wonder","learn a lesson","range of"]
   },
@@ -3035,15 +3035,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find outback words", de:"Finde Outback-Wörter"},
-        correct:["Aborigine","(the) outback","bush trail","walkabout","ancestor","heritage","survival skills"],
-        distractors:["envelope","cheque"] },
-      { t:{en:"Find flying-doctor words", de:"Finde Flugarzt-Wörter"},
-        correct:["aircraft","ambulance","first aid","drugs","landing","airline"],
-        distractors:["walkabout","reed","string"] },
-      { t:{en:"Find physical-action verbs", de:"Finde Bewegungs-Verben"},
-        correct:["crawl","drag","grab","jump-start","provide"],
-        distractors:["shade","pressure","headlight"] }
+      { t:{en:"outback-life words", de:"Outback-Wörter"},
+        correct:["Aborigine","(the) outback","bush trail","walkabout","ancestor","heritage","survival skills","track"],
+        distractors:["aircraft","ambulance","first aid","airline"] },
+      { t:{en:"flying-doctor words", de:"Flugarzt-Wörter"},
+        correct:["aircraft","ambulance","first aid","drugs","landing","airline","distance","provide"],
+        distractors:["walkabout","ancestor","heritage","bush trail"] },
+      { t:{en:"physical-action & outback verbs", de:"Bewegungs- & Outback-Verben"},
+        correct:["crawl","drag","grab","jump-start","provide","track","walkabout"],
+        distractors:["shade","pressure","headlight","ambulance","aircraft"] }
     ],
     sb: ["Aborigine","walkabout","ancestor","heritage","survival skills","(the) outback","ambulance","aircraft","first aid","gorgeous","envelope","excess weight","detailed","jump-start","bush trail"]
   },
@@ -3082,15 +3082,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find book/monastery words", de:"Finde Bücher-/Kloster-Wörter"},
-        correct:["library","librarian","monastery","monk","precious","preserve","sheet"],
-        distractors:["execute","auction"] },
-      { t:{en:"Find justice words", de:"Finde Justiz-Wörter"},
-        correct:["judge","execute","sentence to death","rob","command","furious"],
-        distractors:["librarian","precious"] },
-      { t:{en:"Find addiction words", de:"Finde Sucht-Wörter"},
-        correct:["addict","addiction","go crazy","miss out on sth","pale"],
-        distractors:["sheet","whisper","kitschy"] }
+      { t:{en:"monastery & book words", de:"Kloster- & Bücher-Wörter"},
+        correct:["library","librarian","monastery","monk","precious","preserve","rare","sheet"],
+        distractors:["judge","execute","auction","black market"] },
+      { t:{en:"justice & crime words", de:"Justiz- & Verbrechens-Wörter"},
+        correct:["judge","execute","sentence to death","rob","burn to the ground","furious","auction","black market"],
+        distractors:["librarian","monastery","precious","sheet"] },
+      { t:{en:"addiction & reaction words", de:"Sucht- & Reaktions-Wörter"},
+        correct:["addict","addiction","go crazy","miss out on sth","pale","confuse sb","whisper","turn up"],
+        distractors:["preserve","precious","judge","auction"] }
     ],
     sb: ["librarian","monastery","precious","preserve","execute","sentence to death","addiction","furious","auction","black market","fascination","kitschy","whisper","confuse sb","command"]
   },
@@ -3128,15 +3128,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find wedding words", de:"Finde Hochzeits-Wörter"},
-        correct:["wedding dress","wedding suit","bride","bridegroom","bridesmaid","ceremony"],
-        distractors:["funeral","devil","goth"] },
-      { t:{en:"Find gesture/hand words", de:"Finde Gesten-Wörter"},
-        correct:["gesture","greet","index finger","thumb","palm","nod the head","victory"],
-        distractors:["sleeve","needle"] },
-      { t:{en:"Find feelings", de:"Finde Gefühle"},
-        correct:["embarrassed","confused","rebellious","giggle","sigh"],
-        distractors:["permanent","pierced","religious"] }
+      { t:{en:"wedding words", de:"Hochzeits-Wörter"},
+        correct:["wedding dress","wedding suit","bride","bridegroom","bridesmaid","ceremony","fashionable"],
+        distractors:["gesture","palm","thumb","embarrassed","confused"] },
+      { t:{en:"gesture & body-part words", de:"Gesten- & Körperteil-Wörter"},
+        correct:["gesture","greet","index finger","thumb","palm","nod the head","victory","insult"],
+        distractors:["bride","ceremony","giggle","sigh"] },
+      { t:{en:"feelings & reactions", de:"Gefühle & Reaktionen"},
+        correct:["embarrassed","confused","rebellious","giggle","sigh","hastily","ignore","scare off"],
+        distractors:["ceremony","gesture","index finger","wedding dress"] }
     ],
     sb: ["bridegroom","bridesmaid","ceremony","fashionable","rebellious","religious","embarrassed","confused","hastily","index finger","nod the head","gesture","possibility","pierced","decent-looking"]
   },
@@ -3175,15 +3175,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find Fair Trade words", de:"Finde Fairhandels-Wörter"},
-        correct:["Fair Trade","farmer","pay rise","pesticide","agreement","make a living","oil"],
-        distractors:["racism","slavery"] },
-      { t:{en:"Find racism words", de:"Finde Rassismus-Wörter"},
-        correct:["racism","racist","slavery","ignorance","fairness","hurtful"],
-        distractors:["pesticide","farmer"] },
-      { t:{en:"Find strong emotions", de:"Finde starke Gefühle"},
-        correct:["angry","helpless","misunderstood","proud","shocked","surprised"],
-        distractors:["select","claim","increase"] }
+      { t:{en:"fair-trade & farming words", de:"Fairhandels- & Landwirtschafts-Wörter"},
+        correct:["Fair Trade","farmer","make a living","pay rise","pesticide","agreement","increase","select"],
+        distractors:["racism","slavery","proud","shocked"] },
+      { t:{en:"racism & inequality words", de:"Rassismus- & Ungleichheits-Wörter"},
+        correct:["racism","racist","slavery","ignorance","fairness","recognition","defeat","overcome"],
+        distractors:["farmer","pesticide","proud","helpless"] },
+      { t:{en:"strong-emotion words", de:"Wörter für starke Gefühle"},
+        correct:["angry","annoy","helpless","hurt","misunderstood","proud","shocked","surprised"],
+        distractors:["farmer","pesticide","slavery","recognition"] }
     ],
     sb: ["pesticide","slavery","ignorance","recognition","racism","racist","fairness","misunderstood","brother-in-law","son-in-law","human being","hurtful","pollution","agreement","introduction"]
   },
@@ -3222,15 +3222,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find book types", de:"Finde Buch-Arten"},
+      { t:{en:"book-type words", de:"Buch-Arten"},
         correct:["screenplay","play","poetry","comic","novel","biography","short story","anthology"],
-        distractors:["blurb"] },
-      { t:{en:"Find book-related words", de:"Finde Buch-Wörter"},
-        correct:["book review","blurb","dictionary","historical novel","trilogy","reference"],
-        distractors:["fence","kilt","goggles"] },
-      { t:{en:"Find Scottish-adventure words", de:"Finde Schottland-Wörter"},
-        correct:["kilt","goggles","fence","wee","spot of bother","sort oneself out"],
-        distractors:["fairy","millionaire","innocent"] }
+        distractors:["blurb","dictionary","kilt","fence"] },
+      { t:{en:"book-feature words", de:"Buch-Merkmale"},
+        correct:["book review","blurb","dictionary","historical novel","trilogy","reference","disappointment","prefer"],
+        distractors:["comic","novel","kilt","goggles"] },
+      { t:{en:"Scottish-adventure words", de:"Schottland-Wörter"},
+        correct:["kilt","goggles","fence","wee","spot of bother","sort oneself out","answer the door","clear up"],
+        distractors:["poetry","blurb","biography","dictionary"] }
     ],
     sb: ["screenplay","anthology","biography","trilogy","historical novel","dictionary","disappointment","millionaire","innocent","reference","spot of bother","sort oneself out","answer the door","fairy","scratch"]
   },
@@ -3269,15 +3269,15 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find space objects", de:"Finde Weltraum-Objekte"},
-        correct:["asteroid","astronaut","space shuttle","spacecraft","orbit","atmosphere","crew"],
-        distractors:["advert","masterpiece"] },
-      { t:{en:"Find space-view words", de:"Finde Weltraum-Blick-Wörter"},
-        correct:["sunrise","sunset","gravity","surface","biosphere","uninhabitable","mankind"],
-        distractors:["demand","disturb"] },
-      { t:{en:"Find feelings & reactions", de:"Finde Gefühle & Reaktionen"},
-        correct:["depressed","disgusting","tiring","disturb"],
-        distractors:["celebrate","reply","warning","masterpiece"] }
+      { t:{en:"space-exploration words", de:"Weltraumforschungs-Wörter"},
+        correct:["asteroid","astronaut","space shuttle","spacecraft","orbit","atmosphere","crew","commander"],
+        distractors:["engineering","commercial","demand","multibillion"] },
+      { t:{en:"space-view & world words", de:"Weltraum-Blick- & Welt-Wörter"},
+        correct:["sunrise","sunset","gravity","surface","biosphere","uninhabitable","mankind","space travel"],
+        distractors:["asteroid","crew","explosion","warning"] },
+      { t:{en:"missions & business words", de:"Missions- & Geschäfts-Wörter"},
+        correct:["explosion","warning","engineering","commercial","privately owned","multibillion","demand","genetic engineering"],
+        distractors:["sunrise","astronaut","gravity","orbit"] }
     ],
     sb: ["astronaut","asteroid","space shuttle","spacecraft","atmosphere","uninhabitable","genetic engineering","biosphere","gravity","engineering","commander","multibillion","masterpiece","commercial","disgusting"]
   },
@@ -3306,12 +3306,12 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"Find leisure activities", de:"Finde Freizeit-Aktivitäten"},
-        correct:["scuba-diving","leisure centre","tournament","chill out","kill time","take up"],
-        distractors:["beggar","coal","legend"] },
-      { t:{en:"Find sport & effort words", de:"Finde Sport-Wörter"},
-        correct:["discipline","tough","honestly","apply (for)","attend","highlight"],
-        distractors:["edition","ripe","legend"] }
+      { t:{en:"leisure-activity words", de:"Freizeit-Aktivitäten"},
+        correct:["scuba-diving","leisure centre","tournament","chill out","highlight","kill time","take up","attend"],
+        distractors:["discipline","tough","water-proof","honestly"] },
+      { t:{en:"sport & effort words", de:"Sport- & Einsatz-Wörter"},
+        correct:["apply (for)","discipline","tough","honestly","water-proof","catch up on","get involved with","help out"],
+        distractors:["tournament","highlight","chill out","leisure centre"] }
     ],
     sb: ["scuba-diving","tournament","discipline","leisure centre","occasionally","water-proof","autograph","catch up on","get involved with","honestly","apply (for)","legend","highlight","ripe","beggar"]
   }
@@ -6274,11 +6274,14 @@ function wordHuntNextRound() {
   const correct = [...task.correct];
   const distractors = [...(task.distractors || [])];
   shuffle(correct); shuffle(distractors);
-  const maxTiles = 9;
-  let cap = Math.min(correct.length, maxTiles - Math.min(distractors.length, 2));
-  cap = Math.max(cap, 3);
-  const correctPicks = correct.slice(0, Math.min(correct.length, cap));
-  const distractorPicks = distractors.slice(0, maxTiles - correctPicks.length);
+  const totalTiles = 12;
+  const targetCorrect = 8;
+  let correctPicks = correct.slice(0, Math.min(targetCorrect, correct.length));
+  let distractorPicks = distractors.slice(0, totalTiles - correctPicks.length);
+  if (correctPicks.length + distractorPicks.length < totalTiles && correct.length > correctPicks.length) {
+    const need = totalTiles - correctPicks.length - distractorPicks.length;
+    correctPicks = correctPicks.concat(correct.slice(correctPicks.length, correctPicks.length + need));
+  }
   const tiles = [...correctPicks, ...distractorPicks];
   shuffle(tiles);
   whState.tiles = tiles;
