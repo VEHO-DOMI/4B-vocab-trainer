@@ -2914,15 +2914,18 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"professions", de:"Berufe"},
-        correct:["accountant","receptionist","mechanic","nurse","electrician","secretary","flight attendant","employer"],
-        distractors:["salary","deadline","ambition","casual"] },
-      { t:{en:"work-life words", de:"Arbeitsleben-Wörter"},
-        correct:["career","salary","bonus","deadline","working hours","(job) interview","unemployed","earn"],
-        distractors:["mechanic","nurse","confidently","memorise"] },
-      { t:{en:"interview-skill words", de:"Interview-Wörter"},
-        correct:["confidently","enthusiastic","eye contact","memorise","skills","ambition","casual","advice"],
-        distractors:["salary","career","accountant","nurse"] }
+      { t:{en:"work life — pay, hours & responsibilities", de:"Arbeitsleben — Gehalt, Stunden & Verantwortung"},
+        sub:{en:"Pick words about a job's conditions — what you get paid, when you work, and what you're in charge of.", de:"Wähle Wörter über die Bedingungen eines Jobs — was du verdienst, wann du arbeitest und wofür du verantwortlich bist."},
+        correct:["salary","bonus","deadline","working hours","earn","be responsible for","unemployed","career"],
+        distractors:["hobby","friendship","grandmother","recipe"] },
+      { t:{en:"interview skills & qualities", de:"Bewerbungsgespräch — Fähigkeiten & Auftreten"},
+        sub:{en:"Pick words about how to behave and come across in a job interview.", de:"Wähle Wörter darüber, wie man sich in einem Bewerbungsgespräch verhält und auftritt."},
+        correct:["confidently","enthusiastic","eye contact","memorise","skills","ambition","casual","naturally"],
+        distractors:["lazy","rude","silent","shy"] },
+      { t:{en:"fields of work", de:"Berufsfelder"},
+        sub:{en:"Pick industries where people can have a career.", de:"Wähle Branchen, in denen man eine Karriere machen kann."},
+        correct:["computing","finance","health care","sales and marketing","journalism"],
+        distractors:["sunshine","breakfast","puzzle","weekend"] }
     ],
     sb: ["accountant","receptionist","electrician","flight attendant","secretary","enthusiastic","confidently","ambition","salary","deadline","(job) interview","satisfaction","unemployed","memorise","naturally"]
   },
@@ -2961,15 +2964,14 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"healthy-eating words", de:"Wörter rund um gesunde Ernährung"},
-        correct:["healthy","nutritious","tasty","filling","vegetarian","regularly","diet","nutrition"],
-        distractors:["artificial","fattening","revolting","harmful"] },
-      { t:{en:"unhealthy-food words", de:"Wörter rund um ungesundes Essen"},
-        correct:["artificial","fattening","revolting","harmful","overweight","(be) ashamed"],
-        distractors:["healthy","nutritious","tasty","filling","nutrition","vegetarian"] },
-      { t:{en:"eating-disorder & feelings words", de:"Wörter rund um Essstörungen & Gefühle"},
-        correct:["eating disorder","gain","thin","throw up","(be) ashamed","hunger","waste"],
-        distractors:["nutritious","tasty","regularly","intake","diet"] }
+      { t:{en:"healthy diet & nutrition", de:"Gesunde Ernährung"},
+        sub:{en:"Pick words about food choices, nutrition, and eating well.", de:"Wähle Wörter über Essensauswahl, Ernährung und gesundes Essen."},
+        correct:["vegetarian","diet","health","nutrition","regularly","contain","intake","cookery"],
+        distractors:["weather","library","bicycle","fashion"] },
+      { t:{en:"eating problems & body image", de:"Essstörungen & Körperbild"},
+        sub:{en:"Pick words about disordered eating and negative feelings about one's body.", de:"Wähle Wörter über Essstörungen und negative Gefühle über den eigenen Körper."},
+        correct:["overweight","thin","eating disorder","gain","throw up","(be) ashamed"],
+        distractors:["piano","guitar","song"] }
     ],
     sb: ["artificial","nutritious","revolting","fattening","vegetarian","overweight","eating disorder","nutrition","regularly","afterwards","harmful","(be) ashamed","even though","dislike","habits"]
   },
@@ -2996,12 +2998,10 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"achievement & goal words", de:"Ziel- & Erfolgs-Wörter"},
+      { t:{en:"goals & achievement", de:"Ziele & Erfolg"},
+        sub:{en:"Pick words about reaching a goal, improving, and being inspired or supported.", de:"Wähle Wörter über das Erreichen eines Ziels, Verbesserung und Inspiration oder Unterstützung."},
         correct:["achieve","goal","exceed","inspire","support","encouragement","learn a lesson"],
-        distractors:["donate","income","community","grateful","transmit"] },
-      { t:{en:"community & feelings words", de:"Gemeinschaft & Gefühle"},
-        correct:["donate","income","community","grateful","range of","transmit","relate to","frustrated"],
-        distractors:["achieve","exceed","inspire","learn a lesson"] }
+        distractors:["fail","laziness","boredom","defeat","regret"] }
     ],
     sb: ["achieve","encouragement","grateful","frustrated","community","inspire","donate","exceed","transmit","income","in particular","relate to","Small wonder","learn a lesson","range of"]
   },
@@ -3039,15 +3039,14 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"outback-life words", de:"Outback-Wörter"},
+      { t:{en:"Aboriginal life & the outback", de:"Aboriginal-Leben & das Outback"},
+        sub:{en:"Pick words about Aboriginal Australian culture and the outback landscape.", de:"Wähle Wörter über die Kultur der Aborigines und die Outback-Landschaft."},
         correct:["Aborigine","(the) outback","bush trail","walkabout","ancestor","heritage","survival skills","track"],
-        distractors:["aircraft","ambulance","first aid","airline"] },
-      { t:{en:"flying-doctor words", de:"Flugarzt-Wörter"},
+        distractors:["skyscraper","elevator","subway","cafe"] },
+      { t:{en:"Flying Doctor medical aviation", de:"Flying Doctor — medizinischer Flugdienst"},
+        sub:{en:"Pick words about the plane, the medical help, and the long distances in the outback.", de:"Wähle Wörter über das Flugzeug, die medizinische Hilfe und die langen Strecken im Outback."},
         correct:["aircraft","ambulance","first aid","drugs","landing","airline","distance","provide"],
-        distractors:["walkabout","ancestor","heritage","bush trail"] },
-      { t:{en:"physical-action & outback verbs", de:"Bewegungs- & Outback-Verben"},
-        correct:["crawl","drag","grab","jump-start","provide","track","walkabout"],
-        distractors:["shade","pressure","headlight","ambulance","aircraft"] }
+        distractors:["piano","symphony","poem","library"] }
     ],
     sb: ["Aborigine","walkabout","ancestor","heritage","survival skills","(the) outback","ambulance","aircraft","first aid","gorgeous","envelope","excess weight","detailed","jump-start","bush trail"]
   },
@@ -3086,15 +3085,18 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"monastery & book words", de:"Kloster- & Bücher-Wörter"},
+      { t:{en:"the monastery & the rare book", de:"Das Kloster & das seltene Buch"},
+        sub:{en:"Pick words about monks, the library, and preserving precious old books.", de:"Wähle Wörter über Mönche, die Bibliothek und das Bewahren kostbarer alter Bücher."},
         correct:["library","librarian","monastery","monk","precious","preserve","rare","sheet"],
-        distractors:["judge","execute","auction","black market"] },
-      { t:{en:"justice & crime words", de:"Justiz- & Verbrechens-Wörter"},
+        distractors:["supermarket","gym","airport","smartphone"] },
+      { t:{en:"justice & crime", de:"Justiz & Verbrechen"},
+        sub:{en:"Pick words about criminals, judges, punishments, and illegal markets.", de:"Wähle Wörter über Verbrecher, Richter, Strafen und illegale Märkte."},
         correct:["judge","execute","sentence to death","rob","burn to the ground","furious","auction","black market"],
-        distractors:["librarian","monastery","precious","sheet"] },
-      { t:{en:"addiction & reaction words", de:"Sucht- & Reaktions-Wörter"},
+        distractors:["bakery","flower","wedding","song"] },
+      { t:{en:"addiction & bodily reactions", de:"Sucht & körperliche Reaktionen"},
+        sub:{en:"Pick words about addiction and the physical or mental reactions that come with it.", de:"Wähle Wörter über Sucht und die körperlichen oder mentalen Reaktionen, die damit einhergehen."},
         correct:["addict","addiction","go crazy","miss out on sth","pale","confuse sb","whisper","turn up"],
-        distractors:["preserve","precious","judge","auction"] }
+        distractors:["sunrise","meadow","playground","poem"] }
     ],
     sb: ["librarian","monastery","precious","preserve","execute","sentence to death","addiction","furious","auction","black market","fascination","kitschy","whisper","confuse sb","command"]
   },
@@ -3132,15 +3134,18 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"wedding words", de:"Hochzeits-Wörter"},
-        correct:["wedding dress","wedding suit","bride","bridegroom","bridesmaid","ceremony","fashionable"],
-        distractors:["gesture","palm","thumb","embarrassed","confused"] },
-      { t:{en:"gesture & body-part words", de:"Gesten- & Körperteil-Wörter"},
-        correct:["gesture","greet","index finger","thumb","palm","nod the head","victory","insult"],
-        distractors:["bride","ceremony","giggle","sigh"] },
+      { t:{en:"gestures & body language", de:"Gesten & Körpersprache"},
+        sub:{en:"Pick words about hand signs, greetings, and body communication.", de:"Wähle Wörter über Handzeichen, Begrüßungen und Körperkommunikation."},
+        correct:["gesture","greet","index finger","nod the head","palm","thumb","victory","insult"],
+        distractors:["homework","sleep","cooking","gardening"] },
       { t:{en:"feelings & reactions", de:"Gefühle & Reaktionen"},
-        correct:["embarrassed","confused","rebellious","giggle","sigh","hastily","ignore","scare off"],
-        distractors:["ceremony","gesture","index finger","wedding dress"] }
+        sub:{en:"Pick words about emotional reactions and how someone responds to a situation.", de:"Wähle Wörter über emotionale Reaktionen und wie jemand auf eine Situation reagiert."},
+        correct:["embarrassed","confused","giggle","sigh","hastily","ignore","scare off","rebellious"],
+        distractors:["chair","clock","elbow","ceiling"] },
+      { t:{en:"piercings & looks", de:"Piercings & Aussehen"},
+        sub:{en:"Pick words about body piercings, style, and how someone looks.", de:"Wähle Wörter über Piercings, Stil und das Aussehen einer Person."},
+        correct:["pierced","needle","permanent","fashionable","decent-looking","goth"],
+        distractors:["cloud","rain","snow"] }
     ],
     sb: ["bridegroom","bridesmaid","ceremony","fashionable","rebellious","religious","embarrassed","confused","hastily","index finger","nod the head","gesture","possibility","pierced","decent-looking"]
   },
@@ -3179,15 +3184,18 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"fair-trade & farming words", de:"Fairhandels- & Landwirtschafts-Wörter"},
+      { t:{en:"Fair Trade & farming", de:"Fair Trade & Landwirtschaft"},
+        sub:{en:"Pick words about farmers, their work, and fair agreements.", de:"Wähle Wörter über Bauern, ihre Arbeit und faire Vereinbarungen."},
         correct:["Fair Trade","farmer","make a living","pay rise","pesticide","agreement","increase","select"],
-        distractors:["racism","slavery","proud","shocked"] },
-      { t:{en:"racism & inequality words", de:"Rassismus- & Ungleichheits-Wörter"},
-        correct:["racism","racist","slavery","ignorance","fairness","recognition","defeat","overcome"],
-        distractors:["farmer","pesticide","proud","helpless"] },
-      { t:{en:"strong-emotion words", de:"Wörter für starke Gefühle"},
+        distractors:["orchestra","ballet","novel","poem"] },
+      { t:{en:"racism & injustice", de:"Rassismus & Ungerechtigkeit"},
+        sub:{en:"Pick words about racism, slavery, and fairness between people.", de:"Wähle Wörter über Rassismus, Sklaverei und Gerechtigkeit zwischen Menschen."},
+        correct:["racism","racist","slavery","ignorance","hurtful","painful","fairness"],
+        distractors:["cooking","gardening","sleeping","reading","dancing"] },
+      { t:{en:"strong emotions", de:"Starke Gefühle"},
+        sub:{en:"Pick words about strong feelings — anger, pride, shock, and hurt.", de:"Wähle Wörter über starke Gefühle — Wut, Stolz, Schock und Verletzung."},
         correct:["angry","annoy","helpless","hurt","misunderstood","proud","shocked","surprised"],
-        distractors:["farmer","pesticide","slavery","recognition"] }
+        distractors:["table","door","window","ceiling"] }
     ],
     sb: ["pesticide","slavery","ignorance","recognition","racism","racist","fairness","misunderstood","brother-in-law","son-in-law","human being","hurtful","pollution","agreement","introduction"]
   },
@@ -3226,15 +3234,14 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"book-type words", de:"Buch-Arten"},
-        correct:["screenplay","play","poetry","comic","novel","biography","short story","anthology"],
-        distractors:["blurb","dictionary","kilt","fence"] },
-      { t:{en:"book-feature words", de:"Buch-Merkmale"},
-        correct:["book review","blurb","dictionary","historical novel","trilogy","reference","disappointment","prefer"],
-        distractors:["comic","novel","kilt","goggles"] },
-      { t:{en:"Scottish-adventure words", de:"Schottland-Wörter"},
-        correct:["kilt","goggles","fence","wee","spot of bother","sort oneself out","answer the door","clear up"],
-        distractors:["poetry","blurb","biography","dictionary"] }
+      { t:{en:"books & reading", de:"Bücher & Lesen"},
+        sub:{en:"Pick words about books, reviews, and genres of literature.", de:"Wähle Wörter über Bücher, Rezensionen und literarische Genres."},
+        correct:["book review","blurb","historical novel","trilogy","reference","disappointment","prefer"],
+        distractors:["breakfast","bicycle","weather","sunrise","marathon"] },
+      { t:{en:"the Scottish adventure story", de:"Die schottische Abenteuergeschichte"},
+        sub:{en:"Pick words from the story about the wee Scottish millionaire and the bother he gets into.", de:"Wähle Wörter aus der Geschichte über den kleinen schottischen Millionär und den Ärger, in den er gerät."},
+        correct:["fence","millionaire","goggles","kilt","spot of bother","sort oneself out","wee","answer the door","clear up"],
+        distractors:["smartphone","laptop","airport"] }
     ],
     sb: ["screenplay","anthology","biography","trilogy","historical novel","dictionary","disappointment","millionaire","innocent","reference","spot of bother","sort oneself out","answer the door","fairy","scratch"]
   },
@@ -3273,15 +3280,14 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"space-exploration words", de:"Weltraumforschungs-Wörter"},
-        correct:["asteroid","astronaut","space shuttle","spacecraft","orbit","atmosphere","crew","commander"],
-        distractors:["engineering","commercial","demand","multibillion"] },
-      { t:{en:"space-view & world words", de:"Weltraum-Blick- & Welt-Wörter"},
-        correct:["sunrise","sunset","gravity","surface","biosphere","uninhabitable","mankind","space travel"],
-        distractors:["asteroid","crew","explosion","warning"] },
-      { t:{en:"missions & business words", de:"Missions- & Geschäfts-Wörter"},
-        correct:["explosion","warning","engineering","commercial","privately owned","multibillion","demand","genetic engineering"],
-        distractors:["sunrise","astronaut","gravity","orbit"] }
+      { t:{en:"space exploration", de:"Weltraumforschung"},
+        sub:{en:"Pick words about astronauts, spacecraft, and missions into space.", de:"Wähle Wörter über Astronauten, Raumfahrzeuge und Weltraummissionen."},
+        correct:["asteroid","astronaut","space shuttle","spacecraft","orbit","atmosphere","crew","space travel","commander"],
+        distractors:["bicycle","harvest","museum"] },
+      { t:{en:"space views & our planet", de:"Weltraumblicke & unser Planet"},
+        sub:{en:"Pick words about what astronauts see from space and the planet below them.", de:"Wähle Wörter darüber, was Astronauten aus dem Weltraum sehen, und über den Planeten darunter."},
+        correct:["sunrise","sunset","gravity","surface","biosphere","uninhabitable","mankind"],
+        distractors:["basketball","orchestra"] }
     ],
     sb: ["astronaut","asteroid","space shuttle","spacecraft","atmosphere","uninhabitable","genetic engineering","biosphere","gravity","engineering","commander","multibillion","masterpiece","commercial","disgusting"]
   },
@@ -3310,12 +3316,14 @@ const VOCAB_TASKS = {
       ]}
     ],
     wh: [
-      { t:{en:"leisure-activity words", de:"Freizeit-Aktivitäten"},
-        correct:["scuba-diving","leisure centre","tournament","chill out","highlight","kill time","take up","attend"],
-        distractors:["discipline","tough","water-proof","honestly"] },
-      { t:{en:"sport & effort words", de:"Sport- & Einsatz-Wörter"},
-        correct:["apply (for)","discipline","tough","honestly","water-proof","catch up on","get involved with","help out"],
-        distractors:["tournament","highlight","chill out","leisure centre"] }
+      { t:{en:"leisure & free time", de:"Freizeit"},
+        sub:{en:"Pick words about fun, relaxation, and activities you do outside school or work.", de:"Wähle Wörter über Spaß, Erholung und Aktivitäten außerhalb von Schule oder Arbeit."},
+        correct:["scuba-diving","water-proof","chill out","leisure centre","kill time","take up","attend","highlight","tournament"],
+        distractors:["homework","exam","overtime"] },
+      { t:{en:"discipline & effort", de:"Disziplin & Einsatz"},
+        sub:{en:"Pick words about working hard, staying committed, and putting in effort.", de:"Wähle Wörter über harte Arbeit, Ausdauer und Einsatz."},
+        correct:["apply (for)","discipline","honestly","tough","catch up on","get involved with","help out"],
+        distractors:["picnic","vacation"] }
     ],
     sb: ["scuba-diving","tournament","discipline","leisure centre","occasionally","water-proof","autograph","catch up on","get involved with","honestly","apply (for)","legend","highlight","ripe","beggar"]
   }
