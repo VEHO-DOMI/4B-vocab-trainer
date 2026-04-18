@@ -1567,7 +1567,7 @@ body.playing .header-container { display: none; }
 .wh-tile:hover, .wh-tile:active { border-color:var(--accent); transform:scale(1.03); }
 .wh-tile.correct { background: var(--correct-glow, #d4f5db); border-color: var(--correct, #16a34a); color: var(--correct, #16a34a); animation: mmMatch 0.4s ease; pointer-events:none; }
 .wh-tile.wrong { background: var(--wrong-glow, #fce4e4); border-color: var(--wrong, #dc2626); color: var(--wrong, #dc2626); animation: mmShake 0.35s ease; pointer-events:none; }
-.wh-tile.missed { border-color: var(--wrong, #dc2626); background: var(--wrong-glow, #fce4e4); opacity:0.7; }
+.wh-tile.missed { border-color: var(--correct, #16a34a); background: var(--correct-glow, #d4f5db); color: var(--correct, #16a34a); opacity:0.7; }
 .wh-feedback { text-align:center; padding:0.7rem; border-radius:10px; font-weight:600; font-size:0.9rem; margin-bottom:0.6rem; display:none; }
 .wh-feedback.show { display:block; animation: sbFbIn 0.3s ease; }
 .wh-feedback.correct { background:var(--correct-glow, #d4f5db); color:var(--correct, #16a34a); }
@@ -6271,6 +6271,7 @@ function wordHuntNextRound() {
   whState.round++;
   whState.answered = false;
   whState.picked = new Set();
+  whState.wrongCount = 0;
   const correct = [...task.correct];
   const distractors = [...(task.distractors || [])];
   shuffle(correct); shuffle(distractors);
@@ -6322,9 +6323,13 @@ function wordHuntTap(el) {
     if (allFound) wordHuntFinishRound(true);
   } else {
     el.classList.add('wrong');
+    whState.wrongCount = (whState.wrongCount || 0) + 1;
     whState.score = Math.max(0, whState.score - 1);
     document.getElementById('wh-score').textContent = whState.score;
-    wordHuntFinishRound(false);
+    const fb = document.getElementById('wh-feedback');
+    fb.textContent = '❌ Not that one — keep going';
+    fb.className = 'wh-feedback show wrong';
+    document.getElementById('wh-next-btn').style.display = '';
   }
 }
 
@@ -6336,18 +6341,24 @@ function wordHuntFinishRound(perfect) {
     el.style.pointerEvents = 'none';
   });
   const fb = document.getElementById('wh-feedback');
-  if (perfect) {
+  const wrongs = whState.wrongCount || 0;
+  if (perfect && wrongs === 0) {
     fb.textContent = '🌟 Perfect! All found!';
     fb.className = 'wh-feedback show correct';
     awardVocabXP(6, 'Word Hunt');
+  } else if (perfect) {
+    fb.textContent = '✅ All found! (' + wrongs + ' wrong)';
+    fb.className = 'wh-feedback show correct';
+    awardVocabXP(3, 'Word Hunt');
   } else {
-    fb.textContent = '❌ Wrong tap — moving on!';
+    fb.textContent = '⏭️ Answers revealed';
     fb.className = 'wh-feedback show wrong';
   }
   document.getElementById('wh-next-btn').style.display = '';
 }
 
 function wordHuntNext() {
+  if (!whState.answered) { wordHuntFinishRound(false); return; }
   if (whState.round >= whState.totalRounds) { finishWordHunt(); return; }
   wordHuntNextRound();
 }
